@@ -28,7 +28,7 @@
               <a href="#" id="payment-button">Buy a License ($500 USD)</a>
               <script>
                 var handler = StripeCheckout.configure({
-                  key: 'pk_test_KscYqxvgL5DmidldZjwSXDAk',
+                  key: 'pk_live_7oYoRXegKaR0zJrcjMhxlpHp',
                   image: '/cordova-background-geolocation/images/transistor-logo-symbol.png',
                   token: function(token) {
                     // Use the token to create the charge with a server-side script.
@@ -39,9 +39,9 @@
                 $('#payment-button').on('click', function(e) {
                   // Open Checkout with further options
                   handler.open({
-                    name: 'Demo Site',
-                    description: '2 widgets',
-                    amount: 2000
+                    name: 'Transistor Software',
+                    description: 'Cordova Background GeoLocation Plugin License',
+                    amount: 500
                   });
                   e.preventDefault();
                 });
