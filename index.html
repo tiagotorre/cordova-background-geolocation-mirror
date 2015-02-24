@@ -12,7 +12,6 @@
     <title>Cordova-background-geolocation</title>
     <script src="javascripts/jquery.min.js"></script>
 
-    <script src="https://checkout.stripe.com/checkout.js"></script>
   </head>
 
   <body>
@@ -25,32 +24,7 @@
           <h2 id="project_tagline">Background GeoLocation Plugin for Cordova (Premium Version)</h2>
 
             <section id="">
-              <a href="#" id="payment-button">Buy a License ($500 USD)</a>
-              <script>
-                var handler = StripeCheckout.configure({
-                  key: 'pk_live_7oYoRXegKaR0zJrcjMhxlpHp',
-                  image: '/cordova-background-geolocation/images/transistor-logo-symbol.png',
-                  token: function(token) {
-                    // Use the token to create the charge with a server-side script.
-                    // You can access the token ID with `token.id`
-                  }
-                });
-
-                $('#payment-button').on('click', function(e) {
-                  // Open Checkout with further options
-                  handler.open({
-                    name: 'Transistor Software',
-                    description: 'Cordova Background GeoLocation',
-                    amount: 50000
-                  });
-                  e.preventDefault();
-                });
-
-                // Close Checkout on page navigation
-                $(window).on('popstate', function() {
-                  handler.close();
-                });
-              </script>
+              <a href="http://transistorsoft.com/checkout/cordova-background-geolocation">Buy a License ($500 USD)</a>
             </section>
         </header>
     </div>
