@@ -1,336 +1,157 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Cordova-background-geolocation : Background GeoLocation Plugin for Cordova (Premium Version)">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/transistor.css">
-
-    <title>Cordova-background-geolocation</title>
-    <script src="javascripts/jquery.min.js"></script>
-
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/christocracy/cordova-background-geolocation">View on GitHub</a>
-          <h1 id="project_title">Cordova Background Geolocation</h1>
-          <h2 id="project_tagline">Background GeoLocation Plugin for Cordova (Premium Version)</h2>
-
-            
-            <a href="https://cedar-transistor.herokuapp.com/checkout/cordova-background-geolocation" id="payment-button">Buy a License ($500 USD)</a>
-            <a href="build/CordovaBackgroundGeoLocation.apk" id="demo-button">Sample App</a>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Cordova Background GeoLocation</h3>
-
-        <section class="markdown-body entry-content" itemprop="mainContentOfPage">
-
-<p>Cross-platform background geolocation for Cordova with battery-saving "circular region monitoring" and "stop detection".</p>
-
-<p>Follows the <a href="https://github.com/apache/cordova-plugman/blob/master/plugin_spec.md">Cordova Plugin spec</a>, so that it works with <a href="https://github.com/apache/cordova-plugman">Plugman</a>.</p>
-
-<p>This plugin leverages Cordova/PhoneGap's <a href="http://simonmacdonald.blogspot.ca/2012/08/so-you-wanna-write-phonegap-200-android.html">require/define functionality used for plugins</a>.</p>
-
-<h2>
-<a id="user-content-using-the-plugin" class="anchor" href="#using-the-plugin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the plugin</h2>
-
-<p>The plugin creates the object <code>window.plugins.backgroundGeoLocation</code> with the methods</p>
-
-<p><code>configure(success, fail, option)</code>,</p>
-
-<p><code>start(success, fail)</code></p>
-
-<p><code>stop(success, fail)</code>.</p>
-
-<p><code>changePace(true) // engages aggressive monitoring immediately</code></p>
-
-<h2>
-<a id="user-content-installing-the-plugin" class="anchor" href="#installing-the-plugin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing the plugin</h2>
-
-<pre><code>
-   cordova plugin add https://github.com/christocracy/cordova-background-geolocation.git
-</code></pre>
-
-<h2>
-<a id="user-content-example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
-
-<pre><code>    //
-    //
-    // after deviceready
-    //
-    //
-
-    // Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
-    //  in order to prompt the user for Location permission.
-    window.navigator.geolocation.getCurrentPosition(function(location) {
-        console.log('Location from Phonegap');
-    });
-
-    var bgGeo = window.plugins.backgroundGeoLocation;
-
-    /**
-    * This would be your own callback for Ajax-requests after POSTing background geolocation to your server.
-    */
-    var yourAjaxCallback = function(response) {
-        ////
-        // IMPORTANT:  You must execute the #finish method here to inform the native plugin that you're finished,
-        //  and the background-task may be completed.  You must do this regardless if your HTTP request is successful or not.
-        // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
-        //
-        //
-        bgGeo.finish();
-    };
-
-    /**
-    * This callback will be executed every time a geolocation is recorded in the background.
-    */
-    var callbackFn = function(location) {
-        console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
-        // Do your HTTP request here to POST location to your server.
-        //
-        //
-        yourAjaxCallback.call(this);
-    };
-
-    var failureFn = function(error) {
-        console.log('BackgroundGeoLocation error');
-    }
-
-    // BackgroundGeoLocation is highly configurable.
-    bgGeo.configure(callbackFn, failureFn, {
-        desiredAccuracy: 0,                         // &lt;-- 0:  highest power, highest accuracy; 1000:  lowest power, lowest accuracy.
-        stationaryRadius: 50,
-        distanceFilter: 50,                         // &lt;-- minimum distance between location events
-        activityType: 'AutomotiveNavigation',       // &lt;-- [ios]
-        locationUpdateInterval: 30000,              // &lt;-- [android] minimum time between location updates, used in conjunction with #distanceFilter
-        activityRecognitionInterval: 10000,         // &lt;-- [android] sampling-rate activity-recognition system for movement/stationary detection
-        debug: true,                                // &lt;-- enable this hear sounds, see notifications during life-cycle events.
-        stopOnTerminate: false                      // &lt;-- enable this to clear background location settings when the app terminates
-    });
-
-    // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
-    bgGeo.start();
-
-    // If you wish to turn OFF background-tracking, call the #stop method.
-    // bgGeo.stop()
-
-
-</code></pre>
-
-<p>NOTE: The plugin includes <code>org.apache.cordova.geolocation</code> as a dependency.  You must enable Cordova's GeoLocation in the foreground and have the user accept Location services by executing <code>#watchPosition</code> or <code>#getCurrentPosition</code>.</p>
-
-<h2>
-<a id="user-content-example-application" class="anchor" href="#example-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Application</h2>
-
-<p>This plugin hosts a SampleApp in <code>example/SampleApp</code> folder.  This SampleApp contains no plugins so you must first start by adding this plugin.  <strong>NOTE</strong> In order to use the SampleApp, it's important to make a copy of it outside of the plugin itself.</p>
-
-<pre><code>$ git clone git@github.com:christocracy/cordova-background-geolocation.git
-$ mkdir tmp
-$ cp -R cordova-background-geolocation/example/SampleApp tmp
-$ cd tmp/SampleApp
-$ cordova plugin add git@github.com:christocracy/cordova-background-geolocation.git
-$ cordova platform add ios
-$ cordova platform add android
-$ cordova build ios
-$ cordova build android
-
-</code></pre>
-
-<p>If you're using XCode, boot the SampleApp in the iOS Simulator and enable <code>Debug-&gt;Location-&gt;City Drive</code>.</p>
-
-<h2>
-<a id="user-content-behaviour" class="anchor" href="#behaviour" aria-hidden="true"><span class="octicon octicon-link"></span></a>Behaviour</h2>
-
-<p>The plugin has features allowing you to control the behaviour of background-tracking, striking a balance between accuracy and battery-usage.  In stationary-mode, the plugin attempts to descrease its power usage and accuracy by setting up a circular stationary-region of configurable #stationaryRadius.  iOS has a nice system  <a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html#//apple_ref/occ/instm/CLLocationManager/startMonitoringSignificantLocationChanges">Significant Changes API</a>, which allows the os to suspend your app until a cell-tower change is detected (typically 2-3 city-block change) Android uses the Google Play Services APIs <a href="https://developer.android.com/reference/com/google/android/gms/location/FusedLocationProviderApi.html">FusedLocationProvider API</a> as well as the <a href="https://developer.android.com/reference/com/google/android/gms/location/ActivityRecognitionApi.html">ActivityRecognition API</a> (for movement/stationary detection). Windows Phone does not have such a API.</p>
-
-<p>The plugin will execute your configured <code>callback</code> provided to the <code>#configure(callback, config)</code> method. You must manually POST the received <code>GeoLocation</code> to your server using standard XHR, as well as manually cache a recieved location into <code>localStorage</code> if no network connection is available.</p>
-
-<p>The function <code>changePace(isMoving, success, failure)</code> is provided to force the plugin to enter "moving" or "stationary" state.</p>
-
-<h2>
-<a id="user-content-ios" class="anchor" href="#ios" aria-hidden="true"><span class="octicon octicon-link"></span></a>iOS</h2>
-
-<p>The plugin uses iOS Significant Changes API, and starts triggering your configured <code>callback</code> only when a cell-tower switch is detected (i.e. the device exits stationary radius). </p>
-
-<p>When the plugin detects the device has moved beyond its configured #stationaryRadius, it engages the native platform's geolocation system for aggressive monitoring according to the configured <code>#desiredAccuracy</code>, <code>#distanceFilter</code>.  The plugin attempts to intelligently scale <code>#distanceFilter</code> based upon the current reported speed.  Each time <code>#distanceFilter</code> is determined to have changed by 5m/s, it recalculates it by squaring the speed rounded-to-nearest-five and adding #distanceFilter (I arbitrarily came up with that formula.  Better ideas?).</p>
-
-<p><code>(round(speed, 5))^2 + distanceFilter</code></p>
-
-<h3>
-<a id="user-content-android" class="anchor" href="#android" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android</h3>
-
-<p>Using the <a href="https://developer.android.com/reference/com/google/android/gms/location/ActivityRecognitionApi.html">ActivityRecognition API</a> provided by <a href="https://developer.android.com/google/play-services/index.html">Google Play Services</a>, Android will constantly monitor <a href="https://developer.android.com/reference/com/google/android/gms/location/DetectedActivity.html">the nature</a> of the device's movement at a sampling-rate configured by <code>#activityRecognitionRate</code>.  When the plugin sees a DetectedActivity of <a href="https://developer.android.com/reference/com/google/android/gms/location/DetectedActivity.html">STILL</a>, location-updates will be halted -- when it sees <code>IN_VEHICLE, ON_BICYCLE, ON_FOOT, RUNNING, WALKING</code>, location-updates will be initiated.</p>
-
-<h3>
-<a id="user-content-wp8" class="anchor" href="#wp8" aria-hidden="true"><span class="octicon octicon-link"></span></a>WP8</h3>
-
-<p>WP8 uses <code>callbackFn</code> the way iOS do. On WP8, however, the plugin does not support the Stationary location and does not implement <code>getStationaryLocation()</code> and <code>onPaceChange()</code>.
-Keep in mind that it is <strong>not</strong> possible to use <code>start()</code> at the <code>pause</code> event of Cordova/PhoneGap. WP8 suspend your app immediately and <code>start()</code> will not be executed. So make sure you fire <code>start()</code> before the app is closed/minimized.</p>
-
-<h3>
-<a id="user-content-config" class="anchor" href="#config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config</h3>
-
-<p>Use the following config-parameters with the #configure method:</p>
-
-<h5>
-<a id="user-content-param-integer-desiredaccuracy-0-10-100-1000-in-meters" class="anchor" href="#param-integer-desiredaccuracy-0-10-100-1000-in-meters" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} desiredAccuracy [0, 10, 100, 1000] in meters</code>
-</h5>
-
-<p>Specify the desired-accuracy of the geolocation system with 1 of 4 values, <code>0, 10, 100, 1000</code> where <code>0</code> means HIGHEST POWER, HIGHEST ACCURACY and <code>1000</code> means LOWEST POWER, LOWEST ACCURACY</p>
-
-<ul class="task-list">
-<li><a href="https://developer.android.com/reference/com/google/android/gms/location/LocationRequest.html#PRIORITY_BALANCED_POWER_ACCURACY">Android</a></li>
-<li>
-<a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/index.html#//apple_ref/occ/instp/CLLocationManager/desiredAccuracy">iOS</a> </li>
-</ul>
-
-<h5>
-<a id="user-content-param-integer-stationaryradius-meters" class="anchor" href="#param-integer-stationaryradius-meters" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} stationaryRadius (meters)</code>
-</h5>
-
-<p>When stopped, the minimum distance the device must move beyond the stationary location for aggressive background-tracking to engage.  Note, since the plugin uses iOS significant-changes API, the plugin cannot detect the exact moment the device moves out of the stationary-radius.  In normal conditions, it can take as much as 3 city-blocks to 1/2 km before staionary-region exit is detected.</p>
-
-<h5>
-<a id="user-content-param-boolean-debug" class="anchor" href="#param-boolean-debug" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} debug</code>
-</h5>
-
-<p>When enabled, the plugin will emit sounds for life-cycle events of background-geolocation!  <strong>NOTE iOS</strong>:  In addition, you must manually enable the <em>Audio and Airplay</em> background mode in <em>Background Capabilities</em> to hear these debugging sounds.</p>
-
-<ul class="task-list">
-<li>Exit stationary region:  <em>[ios]</em> Calendar event notification sound <em>[android]</em> dialtone beep-beep-beep</li>
-<li>GeoLocation recorded:  <em>[ios]</em> SMS sent sound, <em>[android]</em> tt short beep, <em>[WP8]</em> High beep, 1 sec.</li>
-<li>Aggressive geolocation engaged:  <em>[ios]</em> SIRI listening sound, <em>[android]</em> none</li>
-<li>Passive geolocation engaged:  <em>[ios]</em> SIRI stop listening sound, <em>[android]</em> none</li>
-<li>Acquiring stationary location sound: <em>[ios]</em> "tick,tick,tick" sound, <em>[android]</em> none</li>
-<li>Stationary location acquired sound:  <em>[ios]</em> "bloom" sound, <em>[android]</em> long tt beep.</li>
-</ul>
-
-<p><a href="images/enable-background-audio.png" target="_blank"><img src="images/enable-background-audio.png" alt="Enable Background Audio" title="Enable Background Audio" style="max-width:100%;"></a></p>
-
-<h5>
-<a id="user-content-param-integer-distancefilter" class="anchor" href="#param-integer-distancefilter" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} distanceFilter</code>
-</h5>
-
-<p>The minimum distance (measured in meters) a device must move horizontally before an update event is generated.  @see <a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html#//apple_ref/occ/instp/CLLocationManager/distanceFilter">Apple docs</a>.  However, #distanceFilter is elastically auto-calculated by the plugin:  When speed increases, #distanceFilter increases;  when speed decreases, so does distanceFilter.</p>
-
-<p>distanceFilter is calculated as the square of speed-rounded-to-nearest-5 and adding configured #distanceFilter.</p>
-
-<p><code>(round(speed, 5))^2 + distanceFilter</code></p>
-
-<p>For example, at biking speed of 7.7 m/s with a configured distanceFilter of 30m:</p>
-
-<p><code>=&gt; round(7.7, 5)^2 + 30</code>
-  <code>=&gt; (10)^2 + 30</code>
-  <code>=&gt; 100 + 30</code>
-  <code>=&gt; 130</code></p>
-
-<p>A gps location will be recorded each time the device moves 130m.</p>
-
-<p>At highway speed of 30 m/s with distanceFilter: 30,</p>
-
-<p><code>=&gt; round(30, 5)^2 + 30</code>
-  <code>=&gt; (30)^2 + 30</code>
-  <code>=&gt; 900 + 30</code>
-  <code>=&gt; 930</code></p>
-
-<p>A gps location will be recorded every 930m</p>
-
-<p>Note the following real example of background-geolocation on highway 101 towards San Francisco as the driver slows down as he runs into slower traffic (geolocations become compressed as distanceFilter decreases)</p>
-
-<p><a href="images/distance-filter-highway.png" target="_blank"><img src="images/distance-filter-highway.png" alt="distanceFilter at highway speed" title="distanceFilter at highway speed" style="max-width:100%;"></a></p>
-
-<p>Compare now background-geolocation in the scope of a city.  In this image, the left-hand track is from a cab-ride, while the right-hand track is walking speed.</p>
-
-<p><a href="images/distance-filter-city.png" target="_blank"><img src="images/distance-filter-city.png" alt="distanceFilter at city scale" title="distanceFilter at city scale" style="max-width:100%;"></a></p>
-
-<h5>
-<a id="user-content-param-boolean-stoponterminate" class="anchor" href="#param-boolean-stoponterminate" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} stopOnTerminate</code>
-</h5>
-
-<p>Enable this in order to force a stop() when the application terminated (e.g. on iOS, double-tap home button, swipe away the app)</p>
-
-<h3>
-<a id="user-content-android-config" class="anchor" href="#android-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android Config</h3>
-
-<h5>
-<a id="user-content-param-integer-millis-locationupdateinterval" class="anchor" href="#param-integer-millis-locationupdateinterval" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer millis} locationUpdateInterval</code>
-</h5>
-
-<p>Set the desired interval for active location updates, in milliseconds.</p>
-
-<p>The location client will actively try to obtain location updates for your application at this interval, so it has a direct influence on the amount of power used by your application. Choose your interval wisely.</p>
-
-<p>This interval is inexact. You may not receive updates at all (if no location sources are available), or you may receive them slower than requested. You may also receive them faster than requested (if other applications are requesting location at a faster interval). </p>
-
-<p>Applications with only the coarse location permission may have their interval silently throttled.</p>
-
-<p>An interval of 0 is allowed, but not recommended, since location updates may be extremely fast on future implementations.</p>
-
-<h5>
-<a id="user-content-param-integer-millis-activityrecognitioninterval" class="anchor" href="#param-integer-millis-activityrecognitioninterval" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer millis} activityRecognitionInterval</code>
-</h5>
-
-<p>the desired time between activity detections. Larger values will result in fewer activity detections while improving battery life. A value of 0 will result in activity detections at the fastest possible rate.</p>
-
-<h3>
-<a id="user-content-ios-config" class="anchor" href="#ios-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>iOS Config</h3>
-
-<h5>
-<a id="user-content-param-string-activitytype-automotivenavigation-othernavigation-fitness-other" class="anchor" href="#param-string-activitytype-automotivenavigation-othernavigation-fitness-other" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} activityType [AutomotiveNavigation, OtherNavigation, Fitness, Other]</code>
-</h5>
-
-<p>Presumably, this affects ios GPS algorithm.  See <a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html#//apple_ref/occ/instp/CLLocationManager/activityType">Apple docs</a> for more information</p>
-
-<h3>
-<a id="user-content-wp8-config" class="anchor" href="#wp8-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>WP8 Config</h3>
-
-<h5>
-<a id="user-content-integer-0-10-100-1000-desiredaccuracy" class="anchor" href="#integer-0-10-100-1000-desiredaccuracy" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>{Integer [0, 10, 100, 1000]} desiredAccuracy</code>
-</h5>
-
-<h6>
-<a id="user-content-windows-phone" class="anchor" href="#windows-phone" aria-hidden="true"><span class="octicon octicon-link"></span></a>Windows Phone</h6>
-
-<p>The underlying GeoLocator you can choose to use 'DesiredAccuracy' or 'DesiredAccuracyInMeters'. Since this plugins default configuration accepts meters, the default desiredAccuracy is mapped to the Windows Phone DesiredAccuracyInMeters leaving the DesiredAccuracy enum empty. For more info see the <a href="http://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.geolocation.geolocator.desiredaccuracyinmeters">MS docs</a> for more information.</p>
-
-<h2>
-<a id="user-content-licence" class="anchor" href="#licence" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licence</h2>
-
+<!doctype html>
+<html lang="en">
+<head>
+		
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+<title>Test page</title>
+
+<link href=" http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="" rel="stylesheet">
+<link href="assets/css/sections-frmwrk-styles.css" rel="stylesheet">
+<link href="assets/css/transistor.css" rel="stylesheet">
+<style>
+
+</style>
+
+</head>
+	<body>
+	
+	<section class="header photo sections-bg-alt no-margin-bottom padding-bottom-100" data-stellar-background-ratio="0.5">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="min-height: 1px;">
+				 <a class="brand-new" href="http://transistorsoft.com"><img src="assets/images/transistor-logo.svg" /></a>
+			</div>
+
+			<a id="btn-free" class="btn btn-lg btn-warning" href="https://github.com/christocracy/cordova-plugin-background-geolocation">Free Version</a>
+
+			<a id="btn-demo" class="btn btn-lg btn-warning" href="assets/CordovaBackgroundGeoLocation.apk">Android Demo</a>
+
+			
+		</div>
+		<div class="row text-center">
+			<div class="hidden-xs hidden-sm col-md-2 col-lg-2" style="min-height: 1px;">
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="min-height: 1px;">
+				<h1 class="page-section text-center">
+					 <strong>Cordova Background Geolocation</strong>
+				</h1>
+				<p class="lead margin-top-20">
+					Premium Version &mdash; $500 USD
+				</p> <a class="btn btn-lg btn-primary margin-top-30" href="https://cedar-transistor.herokuapp.com/checkout/cordova-background-geolocation">Buy Now</a>
+			</div>
+		</div>
+	</div>
 </section>
+<section style="display: block;">
+	<div class="container">
+		<div class="row featurette">
+			<div class="col-md-7" style="min-height: 1px;">
+				<h2 class="featurette-heading">
+					Vastly improved Android <span class="text-muted">Battery Performance</span>
+				</h2>
+				<p class="lead">
+					Implements ActivityRecognition and FusedLocationProvider from Google Play Services for vastly improved battery performance &mdash; as good as or better than iOS.
+				</p>
+			</div>
+			<div class="col-md-5" style="min-height: 1px;">
+				<img class="featurette-image img-responsive" alt="500x500" src="assets/images/android-02.png" />
+			</div>
+		</div><hr class="featurette-divider" />
+		<div class="row featurette">
+			<div class="col-md-5" style="min-height: 1px;">
+				<img class="featurette-image img-responsive" alt="500x500" src="assets/images/android-03.png" />
+			</div>
+			<div class="col-md-7" style="min-height: 1px;">
+				<h2 class="featurette-heading">
+					Android now executes your Javascript callback. <span class="text-muted">Just like iOS</span>
+				</h2>
+				<p class="lead">
+					Unlike the free version of the plugin, which must be configured with an url to your server, the new premium version executes your javascript callback, just like iOS, allowing you access to the GeoLocation within your application code.
+				</p>
+			</div>
+		</div><hr class="featurette-divider" />
+		<div class="row featurette">
+			<div class="col-md-7" style="min-height: 1px;">
+				<h2 class="featurette-heading">
+					Completely refactored Android Code <span class="text-muted">Simpler and easier to extend.</span>
+				</h2>
+				<p class="lead">
+					Weighing in at less than 500 lines-of-code and just two source-files, the Android plugin has been completely refactored
+				</p>
+				<ul class="lead">
+					<li>No more Android Background Service</li>
+					<li>No more in-plugin HTTP</li>
+					<li>No more in-plugin SQLite database</li>
+				</ul>
+			</div>
+			<div class="col-md-5" style="min-height: 1px;">
+				<img class="featurette-image img-responsive" alt="500x500" src="assets/images/android-01.png" />
+			</div>
+		</div><hr class="featurette-divider" />
+		
+		<div class="row featurette ios">
+			<div class="col-md-5" style="min-height: 1px;">
+				<img style="margin-bottom: 10px;" class="featurette-image img-responsive" alt="500x500" src="assets/images/distance-filter-highway.png" />
+				<img class="featurette-image img-responsive" alt="500x500" src="assets/images/distance-filter-city.png" />
+			</div>
+			<div class="col-md-7" style="min-height: 1px;">
+				<h2 class="featurette-heading">
+					Same great iOS performance <span class="text-muted">as the free version</span>
+				</h2>
+				<p class="lead">
+					The premium version uses the same great iOS code as the <a href="https://github.com/christocracy/cordova-plugin-background-geolocation">free version</a>.  If you're already using the free version, you don't have to change a thing for iOS.
+				</p>
+			</div>
+		</div><hr class="featurette-divider" />
 
+	</div>
+</section>
+<footer class="section-dark sticky-footerbox-layer" style="display: block;">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-2 col-lg-3" style="min-height: 1px;">
+				<a href="http://transistorsoft.com"><img class="img-responsive image-center" src="assets/images/transistor-logo.svg" alt="" /></a>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-2 col-lg-3" style="min-height: 1px;">
+				<h4 class="margin-top-20">
+					<span>Our office</span>
+				</h4> <address> <strong>Transistor Software Inc.</strong><br /><i class="icon-map-marker"></i> 828 Av Dollard<br /> Montreal, QC H2V3G7<br /><i class="icon-phone-sign"></i> + 1 (514) 994-2585</address>
+				<ul class="list-unstyled social-links list-inline">
+					<li>
+						<a href="https://twitter.com/christocracy"><i class="fa fa-twitter"></i></a>
+					</li>
+					<li>
+						<a href="https://plus.google.com/u/0/115906598603148757637/posts/p/pub"><i class="fa fa-google-plus"></i></a>
+					</li>
+					<li>
+						<a href="https://github.com/christocracy"><i class="fa fa-github"></i></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+	</div>
+	
+</footer>
 
-    </div>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/js/jquery-2.1.1.min.js"><\/script>')</script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>(function($){if (typeof $().modal != 'function'){document.write('<script src="js/bootstrap.min.js"><\/script>')}})(window.jQuery)</script>
+<script src="assets/js/jquery.countdown.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.fitvids.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.waitforimages.js" type="text/javascript"></script>
+<script src="assets/js/jquery.isotope.min.js" type="text/javascript"></script>
+<script src="assets/js/stellar.js" type="text/javascript"></script>
+<script>(function($) {$(function() {if ($('body').css('color') !== 'rgb(51, 51, 51)') {$('head').prepend('<link rel="stylesheet" href="assets/css/bootstrap.min.css">');}});})(window.jQuery);</script>
+<script>(function($){$('body').append('<div id="check" class="fa">');var check=$('#check');if(check.css('display')!=='inline-block'){$('head').prepend('<link rel="stylesheet" href="assets/css/font-awesome.min.css">');}check.remove();})(window.jQuery)</script>
+<script src="assets/js/custom-scripts.js" type="text/javascript"></script>
+<script type="text/javascript">(function($){ var clickEvent954867 = false;$('#carousel-954867').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent954867 = true;});$('#carousel-954867').bind('slide.bs.carousel', function (e) {  if (!clickEvent954867) {  var nextLi = $('#carousel-954867').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-954867').find('li.carousel-control').first().addClass('active');  }}  clickEvent954867 = false;}); var clickEvent631998 = false;$('#carousel-631998').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent631998 = true;});$('#carousel-631998').bind('slide.bs.carousel', function (e) {  if (!clickEvent631998) {  var nextLi = $('#carousel-631998').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-631998').find('li.carousel-control').first().addClass('active');  }}  clickEvent631998 = false;}); var clickEvent869660 = false;$('#carousel-869660').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent869660 = true;});$('#carousel-869660').bind('slide.bs.carousel', function (e) {  if (!clickEvent869660) {  var nextLi = $('#carousel-869660').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-869660').find('li.carousel-control').first().addClass('active');  }}  clickEvent869660 = false;}); var clickEvent460500 = false;$('#carousel-460500').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent460500 = true;});$('#carousel-460500').bind('slide.bs.carousel', function (e) {  if (!clickEvent460500) {  var nextLi = $('#carousel-460500').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-460500').find('li.carousel-control').first().addClass('active');  }}  clickEvent460500 = false;}); var clickEvent880850 = false;$('#carousel-880850').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent880850 = true;});$('#carousel-880850').bind('slide.bs.carousel', function (e) {  if (!clickEvent880850) {  var nextLi = $('#carousel-880850').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-880850').find('li.carousel-control').first().addClass('active');  }}  clickEvent880850 = false;}); var clickEvent123290 = false;$('#carousel-123290').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent123290 = true;});$('#carousel-123290').bind('slide.bs.carousel', function (e) {  if (!clickEvent123290) {  var nextLi = $('#carousel-123290').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-123290').find('li.carousel-control').first().addClass('active');  }}  clickEvent123290 = false;}); var clickEvent125774 = false;$('#carousel-125774').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent125774 = true;});$('#carousel-125774').bind('slide.bs.carousel', function (e) {  if (!clickEvent125774) {  var nextLi = $('#carousel-125774').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-125774').find('li.carousel-control').first().addClass('active');  }}  clickEvent125774 = false;}); var clickEvent980250 = false;$('#carousel-980250').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent980250 = true;});$('#carousel-980250').bind('slide.bs.carousel', function (e) {  if (!clickEvent980250) {  var nextLi = $('#carousel-980250').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-980250').find('li.carousel-control').first().addClass('active');  }}  clickEvent980250 = false;}); var clickEvent623416 = false;$('#carousel-623416').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent623416 = true;});$('#carousel-623416').bind('slide.bs.carousel', function (e) {  if (!clickEvent623416) {  var nextLi = $('#carousel-623416').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-623416').find('li.carousel-control').first().addClass('active');  }}  clickEvent623416 = false;}); var clickEvent507122 = false;$('#carousel-507122').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent507122 = true;});$('#carousel-507122').bind('slide.bs.carousel', function (e) {  if (!clickEvent507122) {  var nextLi = $('#carousel-507122').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-507122').find('li.carousel-control').first().addClass('active');  }}  clickEvent507122 = false;}); var clickEvent308298 = false;$('#carousel-308298').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent308298 = true;});$('#carousel-308298').bind('slide.bs.carousel', function (e) {  if (!clickEvent308298) {  var nextLi = $('#carousel-308298').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-308298').find('li.carousel-control').first().addClass('active');  }}  clickEvent308298 = false;}); var clickEvent91371 = false;$('#carousel-91371').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent91371 = true;});$('#carousel-91371').bind('slide.bs.carousel', function (e) {  if (!clickEvent91371) {  var nextLi = $('#carousel-91371').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-91371').find('li.carousel-control').first().addClass('active');  }}  clickEvent91371 = false;}); var clickEvent779599 = false;$('#carousel-779599').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent779599 = true;});$('#carousel-779599').bind('slide.bs.carousel', function (e) {  if (!clickEvent779599) {  var nextLi = $('#carousel-779599').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-779599').find('li.carousel-control').first().addClass('active');  }}  clickEvent779599 = false;}); var clickEvent121692 = false;$('#carousel-121692').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent121692 = true;});$('#carousel-121692').bind('slide.bs.carousel', function (e) {  if (!clickEvent121692) {  var nextLi = $('#carousel-121692').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-121692').find('li.carousel-control').first().addClass('active');  }}  clickEvent121692 = false;}); var clickEvent444140 = false;$('#carousel-444140').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent444140 = true;});$('#carousel-444140').bind('slide.bs.carousel', function (e) {  if (!clickEvent444140) {  var nextLi = $('#carousel-444140').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-444140').find('li.carousel-control').first().addClass('active');  }}  clickEvent444140 = false;}); var clickEvent950609 = false;$('#carousel-950609').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent950609 = true;});$('#carousel-950609').bind('slide.bs.carousel', function (e) {  if (!clickEvent950609) {  var nextLi = $('#carousel-950609').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-950609').find('li.carousel-control').first().addClass('active');  }}  clickEvent950609 = false;}); var clickEvent953355 = false;$('#carousel-953355').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent953355 = true;});$('#carousel-953355').bind('slide.bs.carousel', function (e) {  if (!clickEvent953355) {  var nextLi = $('#carousel-953355').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-953355').find('li.carousel-control').first().addClass('active');  }}  clickEvent953355 = false;}); var clickEvent851188 = false;$('#carousel-851188').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent851188 = true;});$('#carousel-851188').bind('slide.bs.carousel', function (e) {  if (!clickEvent851188) {  var nextLi = $('#carousel-851188').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-851188').find('li.carousel-control').first().addClass('active');  }}  clickEvent851188 = false;}); var clickEvent687292 = false;$('#carousel-687292').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent687292 = true;});$('#carousel-687292').bind('slide.bs.carousel', function (e) {  if (!clickEvent687292) {  var nextLi = $('#carousel-687292').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-687292').find('li.carousel-control').first().addClass('active');  }}  clickEvent687292 = false;}); var clickEvent45463 = false;$('#carousel-45463').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent45463 = true;});$('#carousel-45463').bind('slide.bs.carousel', function (e) {  if (!clickEvent45463) {  var nextLi = $('#carousel-45463').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-45463').find('li.carousel-control').first().addClass('active');  }}  clickEvent45463 = false;}); var clickEvent691833 = false;$('#carousel-691833').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent691833 = true;});$('#carousel-691833').bind('slide.bs.carousel', function (e) {  if (!clickEvent691833) {  var nextLi = $('#carousel-691833').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-691833').find('li.carousel-control').first().addClass('active');  }}  clickEvent691833 = false;}); var clickEvent73639 = false;$('#carousel-73639').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent73639 = true;});$('#carousel-73639').bind('slide.bs.carousel', function (e) {  if (!clickEvent73639) {  var nextLi = $('#carousel-73639').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-73639').find('li.carousel-control').first().addClass('active');  }}  clickEvent73639 = false;}); var clickEvent895917 = false;$('#carousel-895917').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent895917 = true;});$('#carousel-895917').bind('slide.bs.carousel', function (e) {  if (!clickEvent895917) {  var nextLi = $('#carousel-895917').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-895917').find('li.carousel-control').first().addClass('active');  }}  clickEvent895917 = false;}); var clickEvent476530 = false;$('#carousel-476530').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent476530 = true;});$('#carousel-476530').bind('slide.bs.carousel', function (e) {  if (!clickEvent476530) {  var nextLi = $('#carousel-476530').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-476530').find('li.carousel-control').first().addClass('active');  }}  clickEvent476530 = false;}); var clickEvent415506 = false;$('#carousel-415506').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent415506 = true;});$('#carousel-415506').bind('slide.bs.carousel', function (e) {  if (!clickEvent415506) {  var nextLi = $('#carousel-415506').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-415506').find('li.carousel-control').first().addClass('active');  }}  clickEvent415506 = false;}); var clickEvent89451 = false;$('#carousel-89451').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent89451 = true;});$('#carousel-89451').bind('slide.bs.carousel', function (e) {  if (!clickEvent89451) {  var nextLi = $('#carousel-89451').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-89451').find('li.carousel-control').first().addClass('active');  }}  clickEvent89451 = false;}); var clickEvent977267 = false;$('#carousel-977267').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent977267 = true;});$('#carousel-977267').bind('slide.bs.carousel', function (e) {  if (!clickEvent977267) {  var nextLi = $('#carousel-977267').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-977267').find('li.carousel-control').first().addClass('active');  }}  clickEvent977267 = false;}); var clickEvent253211 = false;$('#carousel-253211').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent253211 = true;});$('#carousel-253211').bind('slide.bs.carousel', function (e) {  if (!clickEvent253211) {  var nextLi = $('#carousel-253211').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-253211').find('li.carousel-control').first().addClass('active');  }}  clickEvent253211 = false;}); var clickEvent266034 = false;$('#carousel-266034').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent266034 = true;});$('#carousel-266034').bind('slide.bs.carousel', function (e) {  if (!clickEvent266034) {  var nextLi = $('#carousel-266034').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-266034').find('li.carousel-control').first().addClass('active');  }}  clickEvent266034 = false;}); var clickEvent185872 = false;$('#carousel-185872').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent185872 = true;});$('#carousel-185872').bind('slide.bs.carousel', function (e) {  if (!clickEvent185872) {  var nextLi = $('#carousel-185872').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-185872').find('li.carousel-control').first().addClass('active');  }}  clickEvent185872 = false;}); var clickEvent961597 = false;$('#carousel-961597').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent961597 = true;});$('#carousel-961597').bind('slide.bs.carousel', function (e) {  if (!clickEvent961597) {  var nextLi = $('#carousel-961597').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-961597').find('li.carousel-control').first().addClass('active');  }}  clickEvent961597 = false;}); var clickEvent296136 = false;$('#carousel-296136').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent296136 = true;});$('#carousel-296136').bind('slide.bs.carousel', function (e) {  if (!clickEvent296136) {  var nextLi = $('#carousel-296136').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-296136').find('li.carousel-control').first().addClass('active');  }}  clickEvent296136 = false;}); var clickEvent952734 = false;$('#carousel-952734').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent952734 = true;});$('#carousel-952734').bind('slide.bs.carousel', function (e) {  if (!clickEvent952734) {  var nextLi = $('#carousel-952734').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-952734').find('li.carousel-control').first().addClass('active');  }}  clickEvent952734 = false;}); var clickEvent266310 = false;$('#carousel-266310').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent266310 = true;});$('#carousel-266310').bind('slide.bs.carousel', function (e) {  if (!clickEvent266310) {  var nextLi = $('#carousel-266310').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-266310').find('li.carousel-control').first().addClass('active');  }}  clickEvent266310 = false;}); var clickEvent104471 = false;$('#carousel-104471').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent104471 = true;});$('#carousel-104471').bind('slide.bs.carousel', function (e) {  if (!clickEvent104471) {  var nextLi = $('#carousel-104471').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-104471').find('li.carousel-control').first().addClass('active');  }}  clickEvent104471 = false;}); var clickEvent706523 = false;$('#carousel-706523').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent706523 = true;});$('#carousel-706523').bind('slide.bs.carousel', function (e) {  if (!clickEvent706523) {  var nextLi = $('#carousel-706523').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-706523').find('li.carousel-control').first().addClass('active');  }}  clickEvent706523 = false;}); var clickEvent975618 = false;$('#carousel-975618').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent975618 = true;});$('#carousel-975618').bind('slide.bs.carousel', function (e) {  if (!clickEvent975618) {  var nextLi = $('#carousel-975618').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-975618').find('li.carousel-control').first().addClass('active');  }}  clickEvent975618 = false;}); var clickEvent397147 = false;$('#carousel-397147').find('li[data-target]').click(function () {   $(this).parent().find('.active').removeClass('active');  $(this).addClass('active');clickEvent397147 = true;});$('#carousel-397147').bind('slide.bs.carousel', function (e) {  if (!clickEvent397147) {  var nextLi = $('#carousel-397147').find('li.carousel-control.active').removeClass('active').next().addClass('active');  if (nextLi.length == 0) {  $('#carousel-397147').find('li.carousel-control').first().addClass('active');  }}  clickEvent397147 = false;});})(window.jQuery)</script>
+<script id="userscripts" type="text/javascript">(function($){(function ($) { try { } catch (exc) { alert('Script has an error:' + exc) } })})(window.jQuery);</script>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Cordova-background-geolocation maintained by <a href="https://github.com/christocracy">christocracy</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-102968-11");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-
-  </body>
+</body>
 </html>

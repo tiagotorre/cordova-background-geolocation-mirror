@@ -1,0 +1,19 @@
+section.header {
+	padding-top: 0;
+}
+
+#btn-demo {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+#btn-free {
+	position: absolute;
+	top: 20px;
+	right: 180px;
+}
+.featurette.ios img.featurette-image {
+	border: 2px solid #666;
+	width: 400px;
+}
