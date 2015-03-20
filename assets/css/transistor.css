@@ -4,13 +4,13 @@ section.header {
 
 #btn-demo {
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	top: 10px;
+	right: 10px;
 }
 
 #btn-free {
 	position: absolute;
-	top: 20px;
+	top: 10px;
 	right: 180px;
 }
 .featurette.ios img.featurette-image {
