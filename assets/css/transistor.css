@@ -19,13 +19,13 @@ section.header {
 }
 
 @media all and (max-width: 320px) {
-	.brand-new {
-		border: 1px solid red;
+	.brand-new img {
+		margin-top: 40px;
 	}
 }
 
 @media all and (max-width: 480px) {
-	.brand-new {
-		border: 1px solid red;
+	.brand-new img {
+		margin-top: 40px;
 	}
 }
