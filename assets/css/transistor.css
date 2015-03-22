@@ -18,6 +18,17 @@ section.header {
 	width: 400px;
 }
 
+.featurette.testimonials li {
+	margin-bottom: 1.3em;
+}
+.featurette.testimonials li {
+	list-style-type: none;
+}
+.featurette.testimonials cite {
+	font-style: italic;
+	color: #aaa;
+}
+
 @media all and (max-width: 320px) {
 	.brand-new img {
 		margin-top: 40px;
