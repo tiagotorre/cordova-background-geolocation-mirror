@@ -47,3 +47,7 @@ section.header {
 		margin-top: 40px;
 	}
 }
+
+blockquote {
+	font-style: italic;
+}
