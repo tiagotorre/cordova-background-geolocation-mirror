@@ -1,35 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-        
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
-<meta name="description" content="Cordova Background Geolocation" />
-
-<title>Cordova Background GeoLocation</title>
-
-<link href=" http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="" rel="stylesheet">
-
-<link href="assets/css/github.css" rel="stylesheet">
-
-</head>
-    <body>
-
-<!--////
-    //
-    // BEGIN README 
-    //
-    //
-    // -->
-
-<div class="file">
-  <div class="file-header"></div>
-<div id="readme" class="blob instapaper_body">
-    <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
-<a id="user-content-backgroundgeolocation" class="anchor" href="#backgroundgeolocation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background Geolocation</h1>
+<article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+<a id="user-content-backgroundgeolocation" class="anchor" href="#backgroundgeolocation" aria-hidden="true"><span class="octicon octicon-link"></span></a>BackgroundGeoLocation</h1>
 
 <p>Cross-platform background geolocation for Cordova with battery-saving "circular region monitoring" and "stop detection".</p>
 
@@ -53,6 +23,10 @@
 <p><code>changePace(true) // engages aggressive monitoring immediately</code></p>
 
 <p><code>onStationary(callback, fail)</code></p>
+
+<p><code>getLocations(callback, fail)</code></p>
+
+<p><code>sync(callback, fail)</code></p>
 
 <h2>
 <a id="user-content-installing-the-plugin" class="anchor" href="#installing-the-plugin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing the plugin</h2>
@@ -110,18 +84,20 @@ function onDeviceReady() {
         distanceFilter: 50,
         disableElasticity: false, // &lt;-- [iOS] Default is 'false'.  Set true to disable speed-based distanceFilter elasticity
         locationUpdateInterval: 5000,
-        minimumActivityRecognitionConfidence: 80,   // percentage 
+        minimumActivityRecognitionConfidence: 80,   // 0-100%.  Minimum activity-confidence for a state-change 
         fastestLocationUpdateInterval: 5000,
         activityRecognitionInterval: 10000,
         stopTimeout: 0,
         forceReload: true,      // &lt;-- [Android] If the user closes the app **while location-tracking is started** , reboot app (WARNING: possibly distruptive to user) 
         stopOnTerminate: false, // &lt;-- [Android] Allow the background-service to run headless when user closes the app.
         startOnBoot: true,      // &lt;-- [Android] Auto start background-service in headless mode when device is powered-up.
-        activityType: 'AutomotiveNavigation'
+        activityType: 'AutomotiveNavigation',
         /**
         * HTTP Feature:  set an url to allow the native background service to POST locations to your server
         */
-        ,url: 'http://posttestserver.com/post.php?dir=cordova-background-geolocation',
+        url: 'http://posttestserver.com/post.php?dir=cordova-background-geolocation',
+        batchSync: false,       // &lt;-- [Default: false] Set true to sync locations to server in 1 HTTP request.
+        autoSync: true,     // &lt;-- [Default: true] Set true to sync each location to server as it arrives.
         maxDaysToPersist: 1,    // &lt;-- Maximum days to persist a location in plugin's SQLite database when HTTP fails
         headers: {
             "X-FOO": "bar"
@@ -144,7 +120,7 @@ function onDeviceReady() {
 <h2>
 <a id="user-content-example-application" class="anchor" href="#example-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Application</h2>
 
-<p><a href="assets/images/android-sample-app.png" target="_blank"><img src="assets/images/android-sample-app.png" alt="SampleApp" title="SampleApp" style="max-width:100%;" /></a></p>
+<p><a href="assets/images/android-sample-app.png" target="_blank"><img src="assets/images/android-sample-app.png" alt="SampleApp" title="SampleApp" style="max-width:100%;"></a></p>
 
 <p>This plugin hosts a SampleApp in <code>example/SampleApp</code> folder.  This SampleApp contains no plugins so you must first start by adding its required plugins (most importantly, this one).  <strong>NOTE</strong> In order to use the SampleApp, it's important to make a copy of it outside of the plugin itself.</p>
 
@@ -273,6 +249,32 @@ bgGeo.changePace(false); // &lt;-- Disable aggressive GPS monitoring.  Engages s
 });
 </code></pre>
 
+<h5>
+<a id="user-content-getlocationscallbackfn-failurefn" class="anchor" href="#getlocationscallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>getLocations(callbackFn, failureFn)</code>
+</h5>
+
+<p>Fetch all the locations currently stored in native plugin's SQLite database.  Your <code>callbackFn`` will receive an</code>Array``` of locations in the 1st parameter.  Eg:</p>
+
+<pre><code>    bgGeo.getLocations(function(locations) {
+        console.log("locations: ", locations);
+    });
+</code></pre>
+
+<h5>
+<a id="user-content-synccallbackfn-failurefn" class="anchor" href="#synccallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>sync(callbackFn, failureFn)</code>
+</h5>
+
+<p>If the plugin is configured for HTTP with an <code>#url</code> and <code>#autoSync: false</code>, this method will initiate POSTing the locations currently stored in the native SQLite database to your configured <code>#url</code>.  All records in the database will be DELETED.  If you configured <code>batchSync: true</code>, all the locations will be sent to your server in a single HTTP POST request, otherwise the plugin will create execute an HTTP post for <strong>each</strong> location in the database (REST-style).  Your <code>callbackFn</code> will be executed and provided with an Array of all the locations from the SQLite database.  If the plugin failed to sync to your server (possibly because of no network connection), the <code>failureFn</code> will be called with an <code>errorMessage</code>.  If you are <strong>not</strong> using the HTTP features, <code>sync</code> is the only way to clear the native SQLite datbase.  Eg:</p>
+
+<pre><code>    bgGeo.sync(function(locations) {
+        // Here are all the locations from the database.  The database is now EMPTY.
+        console.log('synced locations: ', locations);
+    }, function(errorMessage) {
+        console.warn('Sync FAILURE: ', errorMessage);
+    });
+
+</code></pre>
+
 <h2>
 <a id="user-content-config" class="anchor" href="#config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config</h2>
 
@@ -368,6 +370,18 @@ bgGeo.changePace(false); // &lt;-- Disable aggressive GPS monitoring.  Engages s
 </h5>
 
 <p>By configuring an <code>#url</code>, the  plugin will always attempt to HTTP POST the location to your server.</p>
+
+<h5>
+<a id="user-content-param-string-batchsync-false" class="anchor" href="#param-string-batchsync-false" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} batchSync [false]</code>
+</h5>
+
+<p>Default is <code>false</code>.  If you've enabled HTTP feature by configuring an <code>#url</code>, <code>batchSync: true</code> will POST all the locations currently stored in native SQLite datbase to your server in a single HTTP POST request.  With <code>batchSync: false</code>, an HTTP POST request will be initiated for <strong>each</strong> location in database.</p>
+
+<h5>
+<a id="user-content-param-string-autosync-true" class="anchor" href="#param-string-autosync-true" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} autoSync [true]</code>
+</h5>
+
+<p>Default is <code>true</code>.  If you've enabeld HTTP feature by configuring an <code>#url</code>, the plugin will attempt to HTTP POST each location to your server as it is recorded.  If you set <code>autoSync: false</code>, it's up to you to manually execute the <code>#sync</code> method to initate the HTTP POST (<strong>NOTE</strong> The plugin will continue to persist <strong>every</strong> recorded location in the SQLite database until you execute <code>#sync</code>).</p>
 
 <h5>
 <a id="user-content-param-object-params" class="anchor" href="#param-object-params" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Object} params</code>
@@ -619,8 +633,3 @@ http://transistorsoft.com
 <li><p>Governing Law, Jurisdiction:  Licensee hereby agrees not to initiate class-action lawsuits against Licensor in relation to this license and to compensate Licensor for any legal fees, cost or attorney fees should any claim brought by Licensee against Licensor be denied, in part or in full.</p></li>
 </ol>
 </article>
-  </div>
-  </div>
-<!-- END README -->
-    </body>
-</html>
