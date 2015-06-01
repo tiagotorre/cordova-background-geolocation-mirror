@@ -4,7 +4,7 @@
 //  Created by Chris Scott <chris@transistorsoft.com> on 2013-06-15
 //
 #import "CDVLocation.h"
-#import "CDVBackgroundGeoLocation.h"
+#import "CDVBackgroundGeolocation.h"
 #import <Cordova/CDVJSON.h>
 
 // Debug sounds for bg-geolocation life-cycle events.
@@ -17,7 +17,7 @@
 #define acquiredLocationSound   1052
 #define locationErrorSound      1073
 
-@implementation CDVBackgroundGeoLocation {
+@implementation CDVBackgroundGeolocation {
     BOOL isDebugging;
     BOOL enabled;
     BOOL isUpdatingLocation;

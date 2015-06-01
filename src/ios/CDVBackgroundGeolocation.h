@@ -8,7 +8,7 @@
 #import "CDVLocation.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface CDVBackgroundGeoLocation : CDVPlugin <CLLocationManagerDelegate>
+@interface CDVBackgroundGeolocation : CDVPlugin <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSString* syncCallbackId;
 @property (nonatomic, strong) NSMutableArray* stationaryRegionListeners;
