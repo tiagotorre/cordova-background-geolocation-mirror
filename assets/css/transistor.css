@@ -42,6 +42,9 @@ section.header {
 @media all and (max-width: 320px) {
 	.brand-new img {
 		margin-top: 40px;
+		position: absolute;
+		top: 70px;
+		left: 20px;
 	}
 }
 
