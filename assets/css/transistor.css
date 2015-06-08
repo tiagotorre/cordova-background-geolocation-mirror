@@ -7,6 +7,10 @@ section.header {
 	top: 10px;
 	right: 10px;
 }
+#top-links li {
+	list-style: none;
+	display: inline;
+}
 #btn-license {
 	/*
 	position: absolute;
