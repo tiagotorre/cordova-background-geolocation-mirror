@@ -2,23 +2,27 @@ section.header {
 	padding-top: 0;
 }
 
+#top-links {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
 #btn-license {
+	/*
 	position: absolute;
 	top: 10px;
 	right: 155px;
 	width: 135px;
-}
-#btn-demo {
-	position: absolute;
-	top: 10px;
-	right: 180px;
+	*/
 }
 
 #btn-free {
+	/*
 	position: absolute;
 	top: 10px;
 	right: 10px;
 	width: 135px;
+	*/
 }
 #btn-demo-google-play img {
 	height: 50px;
