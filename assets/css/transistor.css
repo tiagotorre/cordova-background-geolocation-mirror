@@ -20,6 +20,9 @@ section.header {
 .featurette img.featurette-image {
 	width: 500px;
 }
+.featurette img.featurette-image.iphone {
+	width: 400px;
+}
 
 .featurette.testimonials li {
 	margin-bottom: 1.3em;
