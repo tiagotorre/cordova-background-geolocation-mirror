@@ -17,8 +17,7 @@ section.header {
 	left: 0px;
 }
 
-.featurette.ios img.featurette-image {
-	border: 2px solid #666;
+.featurette img.featurette-image {
 	width: 400px;
 }
 
