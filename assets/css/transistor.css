@@ -23,7 +23,9 @@ section.header {
 .featurette img.featurette-image.iphone {
 	width: 400px;
 }
-
+.featurette img.featurette-image.bordered {
+	border: 2px solid black;
+}
 .featurette.testimonials li {
 	margin-bottom: 1.3em;
 }
