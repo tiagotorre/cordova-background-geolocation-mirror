@@ -141,23 +141,7 @@
 				<p class="lead">
 					The premium version implements the native Android & iOS <strong>Geofence</strong> APIs, allowing you to add &amp; remove <strong>circular geofences</strong> (up to 20 for iOS; 100 for Android).  Geofences are <strong>persisted</strong> between application restarts / device reboots.
 				</p>
-				<pre><code>
-				var bgGeo = window.plugins.backgroundGeoLocation;
-
-				// Add a geofence
-				bgGeo.addGeofence({
-					identifier: "Home",
-					radius: 200,
-					notifyOnEntry: true
-				});
-
-				// Listen to all geofence events.
-				bgGeo.onGeofence(function(params, taskId) {
-					console.log("- Geofence was crossed: ", params.identifier);
-					console.log("- Entry or Exit?: ", params.action);
-					bgGeo.finish(taskId);
-				});
-				</code></pre>
+				<script src="https://gist.github.com/christocracy/e827fe22ca8bedbc5e27.js"></script>
 			</div>
 		</div><hr class="featurette-divider" />
 
