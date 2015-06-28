@@ -26,19 +26,43 @@
     // -->
 
 <div class="file">
-  <div class="file-header"><a href="http://shop.transistorsoft.com"><img src ="assets/images/transistor-logo.svg" /></a></div>
-<div id="readme" class="blob instapaper_body">
-    <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
-<a id="user-content-backgroundgeolocation" class="anchor" href="#backgroundgeolocation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background Geolocation</h1>
+  <div class="file-header">
+    <div class="file-actions">
+      
+        <a class="octicon-btn tooltipped tooltipped-nw"
+           href="github-mac://openRepo/https://github.com/christocracy/cordova-background-geolocation?branch=master&amp;filepath=README.md"
+           aria-label="Open this file in GitHub for Mac"
+           data-ga-click="Repository, open with desktop, type:mac">
+            <span class="octicon octicon-device-desktop"></span>
+        </a>
+
+            <form accept-charset="UTF-8" action="/christocracy/cordova-background-geolocation/edit/master/README.md" class="inline-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="CZ9zwgjpI3lZn6WMLKw4m+U0wyD0sExDPTgVAG4+5M/Z4uSJw2lT6rLEYuXnGkcuDBJYlhJcJG44+cSY0/QStA==" /></div>
+              <button class="octicon-btn tooltipped tooltipped-n" type="submit" aria-label="Edit this file" data-hotkey="e" data-disable-with>
+                <span class="octicon octicon-pencil"></span>
+              </button>
+</form>
+          <form accept-charset="UTF-8" action="/christocracy/cordova-background-geolocation/delete/master/README.md" class="inline-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="bl87RPZQv9WNGH3JH72uqyl1tEkKR2NXhmgEJ/LetfCqibu0BcX7XHMDMn601AzesLb53A6Tu9yuWNvlldwe2Q==" /></div>
+            <button class="octicon-btn octicon-btn-danger tooltipped tooltipped-n" type="submit" aria-label="Delete this file" data-disable-with>
+              <span class="octicon octicon-trashcan"></span>
+            </button>
+</form>    </div>
+
+    <div class="file-info">
+        897 lines (612 sloc)
+        <span class="file-info-divider"></span>
+      50.808 kB
+    </div>
+  </div>
+    <div id="readme" class="blob instapaper_body">
+    <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1><a id="user-content-background-geolocation" class="anchor" href="#background-geolocation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background Geolocation</h1>
 
 <p>Cross-platform background geolocation for Cordova with battery-saving "circular region monitoring" and "stop detection".</p>
 
-<p>Follows the <a href="https://github.com/apache/cordova-plugman/blob/master/plugin_spec.md">Cordova Plugin spec</a>, so that it works with <a href="https://github.com/apache/cordova-plugman">Plugman</a>.</p>
+<p>Follows the <a href="http://cordova.apache.org/docs/en/3.0.0/plugin_ref_spec.md">Cordova Plugin spec</a>, so that it works with <a href="https://github.com/apache/cordova-plugman">Plugman</a>.</p>
 
 <p>This plugin leverages Cordova/PhoneGap's <a href="http://simonmacdonald.blogspot.ca/2012/08/so-you-wanna-write-phonegap-200-android.html">require/define functionality used for plugins</a>.</p>
 
-<h2>
-<a id="user-content-using-the-plugin" class="anchor" href="#using-the-plugin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the plugin</h2>
+<h2><a id="user-content-using-the-plugin" class="anchor" href="#using-the-plugin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the plugin</h2>
 
 <p>The plugin creates the object <code>window.plugins.backgroundGeoLocation</code> with the methods</p>
 
@@ -52,26 +76,39 @@
 
 <p><code>changePace(true) // engages aggressive monitoring immediately</code></p>
 
-<p><code>onStationary(callback, fail)</code></p>
+<p><code>getCurrentPosition(success, fail)</code></p>
+
+<p><code>onMotionChange(callback, fail)</code></p>
+
+<p><code>addGeofence(config, callback, fail)</code></p>
+
+<p><code>removeGeofence(identifier, callback, fail)</code> </p>
+
+<p><code>getGeofences(callback, fail)</code> </p>
+
+<p><code>onGeofence(callback, fail)</code></p>
 
 <p><code>getLocations(callback, fail)</code></p>
 
 <p><code>sync(callback, fail)</code></p>
 
-<h2>
-<a id="user-content-installing-the-plugin" class="anchor" href="#installing-the-plugin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing the plugin</h2>
+<p><code>getOdometer(callback, fail)</code></p>
+
+<p><code>resetOdometer(callback, fail)</code></p>
+
+<p><code>playSound(int soundId)</code></p>
+
+<h2><a id="user-content-installing-the-plugin" class="anchor" href="#installing-the-plugin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing the plugin</h2>
 
 <pre><code>
    cordova plugin add https://github.com/christocracy/cordova-background-geolocation.git
 </code></pre>
 
-<h2>
-<a id="user-content-help" class="anchor" href="#help" aria-hidden="true"><span class="octicon octicon-link"></span></a>Help</h2>
+<h2><a id="user-content-help" class="anchor" href="#help" aria-hidden="true"><span class="octicon octicon-link"></span></a>Help</h2>
 
 <p><a href="https://github.com/christocracy/cordova-background-geolocation/wiki">See the Wiki</a></p>
 
-<h2>
-<a id="user-content-example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
+<h2><a id="user-content-example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
 
 <pre><code>
 ////
@@ -79,26 +116,26 @@
 //
 function onDeviceReady() {
     /**
-    * This would be your own callback for Ajax-requests after POSTing background geolocation to your server.
-    */
-    var yourAjaxCallback = function(response) {
-        ////
-        // IMPORTANT:  You must execute the #finish method here to inform the native plugin that you're finished,
-        //  and the background-task may be completed.  You must do this regardless if your HTTP request is successful or not.
-        // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
-        //
-        //
-        bgGeo.finish();
-    };
-
-    /**
     * This callback will be executed every time a geolocation is recorded in the background.
     */
-    var callbackFn = function(location) {
+    var callbackFn = function(location, taskId) {
         console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
-        // Do your HTTP request here to POST location to your server.
-        //
-        //
+
+        /**
+        * This would be your own callback for Ajax-requests after POSTing background geolocation to your server.
+        * eg:  
+        *     $.post({url: url, success: yourAjaxCallback});
+        */
+        var yourAjaxCallback = function(response) {
+            ////
+            // IMPORTANT:  You must execute the #finish, providing the taskId provided to callbackFn above in order to inform the native plugin that you're finished,
+            //  and the background-task may be completed.  You must do this regardless if your HTTP request is successful or not.
+            // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
+            //
+            //
+            bgGeo.finish(taskId);
+        };
+
         yourAjaxCallback.call(this);
     };
 
@@ -108,7 +145,7 @@ function onDeviceReady() {
 
     // BackgroundGeoLocation is highly configurable.
     bgGeo.configure(callbackFn, failureFn, {
-        debug: true, // &lt;-- enable this hear sounds for background-geolocation life-cycle.
+        // Geolocation config
         desiredAccuracy: 0,
         stationaryRadius: 50,
         distanceFilter: 50,
@@ -118,16 +155,20 @@ function onDeviceReady() {
         fastestLocationUpdateInterval: 5000,
         activityRecognitionInterval: 10000,
         stopTimeout: 0,
-        forceReload: true,      // &lt;-- [Android] If the user closes the app **while location-tracking is started** , reboot app (WARNING: possibly distruptive to user) 
-        stopOnTerminate: false, // &lt;-- [Android] Allow the background-service to run headless when user closes the app.
-        startOnBoot: true,      // &lt;-- [Android] Auto start background-service in headless mode when device is powered-up.
         activityType: 'AutomotiveNavigation',
-        /**
-        * HTTP Feature:  set an url to allow the native background service to POST locations to your server
-        */
+
+        // Application config
+        debug: true, // &lt;-- enable this hear sounds for background-geolocation life-cycle.
+        forceReloadOnLocationChange: false,  // &lt;-- [Android] If the user closes the app **while location-tracking is started** , reboot app when a new location is recorded (WARNING: possibly distruptive to user) 
+        forceReloadOnMotionChange: false,    // &lt;-- [Android] If the user closes the app **while location-tracking is started** , reboot app when device changes stationary-state (stationary-&gt;moving or vice-versa) --WARNING: possibly distruptive to user) 
+        forceReloadOnGeofence: false,        // &lt;-- [Android] If the user closes the app **while location-tracking is started** , reboot app when a geofence crossing occurs --WARNING: possibly distruptive to user) 
+        stopOnTerminate: false,              // &lt;-- [Android] Allow the background-service to run headless when user closes the app.
+        startOnBoot: true,                   // &lt;-- [Android] Auto start background-service in headless mode when device is powered-up.
+
+        // HTTP / SQLite config
         url: 'http://posttestserver.com/post.php?dir=cordova-background-geolocation',
-        batchSync: false,       // &lt;-- [Default: false] Set true to sync locations to server in 1 HTTP request.
-        autoSync: true,     // &lt;-- [Default: true] Set true to sync each location to server as it arrives.
+        batchSync: true,       // &lt;-- [Default: false] Set true to sync locations to server in a single HTTP request.
+        autoSync: true,         // &lt;-- [Default: true] Set true to sync each location to server as it arrives.
         maxDaysToPersist: 1,    // &lt;-- Maximum days to persist a location in plugin's SQLite database when HTTP fails
         headers: {
             "X-FOO": "bar"
@@ -147,12 +188,20 @@ function onDeviceReady() {
 
 </code></pre>
 
-<h2>
-<a id="user-content-example-application" class="anchor" href="#example-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Application</h2>
+<h2><a id="user-content-advanced-sample-application-for-field-testing" class="anchor" href="#advanced-sample-application-for-field-testing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced Sample Application for Field-testing</h2>
 
-<p><a href="assets/images/android-sample-app.png" target="_blank"><img src="assets/images/android-sample-app.png" alt="SampleApp" title="SampleApp" style="max-width:100%;"></a></p>
+<p>A fully-featured <a href="https://github.com/christocracy/cordova-background-geolocation-SampleApp">SampleApp</a> is available in its own public repo.  After first cloning that repo, follow the installation instructions in the <strong>README</strong> there.  This SampleApp includes a settings-screen allowing you to quickly experiment with all the different settings available for each platform.</p>
 
-<p>This plugin hosts a SampleApp in <code>example/SampleApp</code> folder.  This SampleApp contains no plugins so you must first start by adding its required plugins (most importantly, this one).  <strong>NOTE</strong> In order to use the SampleApp, it's important to make a copy of it outside of the plugin itself.</p>
+<p><a href="/christocracy/cordova-background-geolocation/blob/master/assets/images/iphone/screenshot-iphone5-geofences-framed.png" target="_blank"><img src="assets/images/iphone/screenshot-iphone5-geofences-framed.png" alt="Home" title="Home" style="max-width:100%;"></a>
+<a href="/christocracy/cordova-background-geolocation/blob/master/assets/images/iphone/screenshot-iphone5-settings-framed.png" target="_blank"><img src="assets/images/iphone/screenshot-iphone5-settings-framed.png" alt="Settings" title="Settings" style="max-width:100%;"></a></p>
+
+<h2><a id="user-content-simple-sample-application" class="anchor" href="#simple-sample-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Simple Sample Application</h2>
+
+<p>This plugin itself hosts a more rudimentary SampleApp in <code>example/SampleApp</code> folder.  This SampleApp should be used for reference only -- for actual field-testing, please use the <strong>more advanced</strong> <a href="https://github.com/christocracy/cordova-background-geolocation-SampleApp">SampleApp</a> above.  </p>
+
+<p>This SampleApp contains no plugins so you must first start by adding its required plugins (most importantly, this one).  <strong>NOTE</strong> In order to use the SampleApp, it's important to make a copy of it <strong>outside</strong> of the plugin itself.</p>
+
+<p><a href="/christocracy/cordova-background-geolocation/blob/master/android-sample-app.png" target="_blank"><img src="android-sample-app.png" alt="SampleApp" title="SampleApp" style="max-width:100%;"></a></p>
 
 <pre><code>$ git clone git@github.com:christocracy/cordova-background-geolocation.git
 $ mkdir tmp
@@ -170,8 +219,7 @@ $ cordova build android
 
 <p>If you're using XCode, boot the SampleApp in the iOS Simulator and enable <code>Debug-&gt;Location-&gt;City Drive</code>.</p>
 
-<h2>
-<a id="user-content-help--it-doesnt-work" class="anchor" href="#help--it-doesnt-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Help!  It doesn't work!</h2>
+<h2><a id="user-content-help--it-doesnt-work" class="anchor" href="#help--it-doesnt-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Help!  It doesn't work!</h2>
 
 <p>Yes it does.  <a href="https://github.com/christocracy/cordova-background-geolocation/wiki">See the Wiki</a></p>
 
@@ -190,17 +238,19 @@ $ cordova build ios
 
 </code></pre>
 
-<h2>
-<a id="user-content-behaviour" class="anchor" href="#behaviour" aria-hidden="true"><span class="octicon octicon-link"></span></a>Behaviour</h2>
+<h2><a id="user-content-behaviour" class="anchor" href="#behaviour" aria-hidden="true"><span class="octicon octicon-link"></span></a>Behaviour</h2>
 
-<p>The plugin has features allowing you to control the behaviour of background-tracking, striking a balance between accuracy and battery-usage.  In stationary-mode, the plugin attempts to descrease its power usage and accuracy by setting up a circular stationary-region of configurable #stationaryRadius.  iOS has a nice system  <a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html#//apple_ref/occ/instm/CLLocationManager/startMonitoringSignificantLocationChanges">Significant Changes API</a>, which allows the os to suspend your app until a cell-tower change is detected (typically 2-3 city-block change) Android uses the Google Play Services APIs <a href="https://developer.android.com/reference/com/google/android/gms/location/FusedLocationProviderApi.html">FusedLocationProvider API</a> as well as the <a href="https://developer.android.com/reference/com/google/android/gms/location/ActivityRecognitionApi.html">ActivityRecognition API</a> (for movement/stationary detection). Windows Phone does not have such a API.</p>
+<p>The plugin has features allowing you to control the behaviour of background-tracking, striking a balance between accuracy and battery-usage.  In stationary-mode, the plugin attempts to descrease its power usage and accuracy by setting up a circular stationary-region of configurable #stationaryRadius.  </p>
 
-<p>The plugin will execute your configured <code>callback</code> provided to the <code>#configure(callback, config)</code> method. You must manually POST the received <code>GeoLocation</code> to your server using standard XHR, as well as manually cache a recieved location into <code>localStorage</code> if no network connection is available.</p>
+<p>iOS has a nice system  <a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html#//apple_ref/occ/instm/CLLocationManager/startMonitoringSignificantLocationChanges">Significant Changes API</a>, which allows the os to suspend your app until a cell-tower change is detected (typically 2-3 city-block change) </p>
+
+<p>Android uses the Google Play Services APIs <a href="https://developer.android.com/reference/com/google/android/gms/location/FusedLocationProviderApi.html">FusedLocationProvider API</a> as well as the <a href="https://developer.android.com/reference/com/google/android/gms/location/ActivityRecognitionApi.html">ActivityRecognition API</a> (for movement/stationary detection). Windows Phone does not have such a API.</p>
+
+<p>The plugin will execute your configured <code>callback</code> provided to the <code>#configure(callback, config)</code> method.  Both iOS &amp; Android use a SQLite database to persist <strong>every</strong> recorded geolocation so you don't have to worry about persistence when no network is detected.  The plugin provides a Javascript API to fetch and destroy the records in the database.  In addition, the plugin has an optional HTTP layer allowing allowing you to automatically HTTP POST recorded geolocations to your server.</p>
 
 <p>The function <code>changePace(isMoving, success, failure)</code> is provided to force the plugin to enter "moving" or "stationary" state.</p>
 
-<h2>
-<a id="user-content-ios" class="anchor" href="#ios" aria-hidden="true"><span class="octicon octicon-link"></span></a>iOS</h2>
+<h2><a id="user-content-ios" class="anchor" href="#ios" aria-hidden="true"><span class="octicon octicon-link"></span></a>iOS</h2>
 
 <p>The plugin uses iOS Significant Changes API, and starts triggering your configured <code>callback</code> only when a cell-tower switch is detected (i.e. the device exits stationary radius). </p>
 
@@ -208,29 +258,49 @@ $ cordova build ios
 
 <p><code>(round(speed, 5))^2 + distanceFilter</code></p>
 
-<h3>
-<a id="user-content-android" class="anchor" href="#android" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android</h3>
+<h3><a id="user-content-android" class="anchor" href="#android" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android</h3>
 
 <p>Using the <a href="https://developer.android.com/reference/com/google/android/gms/location/ActivityRecognitionApi.html">ActivityRecognition API</a> provided by <a href="https://developer.android.com/google/play-services/index.html">Google Play Services</a>, Android will constantly monitor <a href="https://developer.android.com/reference/com/google/android/gms/location/DetectedActivity.html">the nature</a> of the device's movement at a sampling-rate configured by <code>#activityRecognitionRate</code>.  When the plugin sees a DetectedActivity of <a href="https://developer.android.com/reference/com/google/android/gms/location/DetectedActivity.html">STILL</a>, location-updates will be halted -- when it sees <code>IN_VEHICLE, ON_BICYCLE, ON_FOOT, RUNNING, WALKING</code>, location-updates will be initiated.</p>
 
-<h3>
-<a id="user-content-wp8" class="anchor" href="#wp8" aria-hidden="true"><span class="octicon octicon-link"></span></a>WP8</h3>
+<h3><a id="user-content-wp8" class="anchor" href="#wp8" aria-hidden="true"><span class="octicon octicon-link"></span></a>WP8</h3>
 
 <p>WP8 uses <code>callbackFn</code> the way iOS do. On WP8, however, the plugin does not support the Stationary location and does not implement <code>getStationaryLocation()</code> and <code>onPaceChange()</code>.
 Keep in mind that it is <strong>not</strong> possible to use <code>start()</code> at the <code>pause</code> event of Cordova/PhoneGap. WP8 suspend your app immediately and <code>start()</code> will not be executed. So make sure you fire <code>start()</code> before the app is closed/minimized.</p>
 
-<h2>
-<a id="user-content-methods" class="anchor" href="#methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods</h2>
+<h2><a id="user-content-methods" class="anchor" href="#methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods</h2>
 
-<h5>
-<a id="user-content-configurelocationcallback-failurecallback-config" class="anchor" href="#configurelocationcallback-failurecallback-config" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>configure(locationCallback, failureCallback, config)</code>
-</h5>
+<h4><a id="user-content-configurelocationcallback-failurecallback-config" class="anchor" href="#configurelocationcallback-failurecallback-config" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>configure(locationCallback, failureCallback, config)</code></h4>
 
-<p>Configures the plugin's parameters (@see following <a href="https://github.com/christocracy/cordova-background-geolocation/blob/edge/README.md#config">Config</a> section for accepted <code>config</code> params.  The <code>locationCallback</code> will be executed each time a new Geolocation is recorded.</p>
+<p>Configures the plugin's parameters (@see following <a href="https://github.com/christocracy/cordova-background-geolocation/blob/edge/README.md#config">Config</a> section for accepted <code>config</code> params.  The <code>locationCallback</code> will be executed each time a new Geolocation is recorded and provided with the following parameters:</p>
 
-<h5>
-<a id="user-content-setconfigsuccessfn-failurefn-config" class="anchor" href="#setconfigsuccessfn-failurefn-config" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>setConfig(successFn, failureFn, config)</code>
-</h5>
+<h6><a id="user-content-param-object-location-the-location-data" class="anchor" href="#param-object-location-the-location-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Object} location The Location data</h6>
+
+<h6><a id="user-content-param-integer-taskid-the-taskid-used-to-send-to-bggeofinishtaskid-in-order-to-signal-completion-of-your-callbackfn" class="anchor" href="#param-integer-taskid-the-taskid-used-to-send-to-bggeofinishtaskid-in-order-to-signal-completion-of-your-callbackfn" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Integer} taskId The taskId used to send to bgGeo.finish(taskId) in order to signal completion of your callbackFn</h6>
+
+<pre><code>bgGeo.configure(function(location, taskId) {
+    try {
+        var coords      = location.coords,
+            timestamp   = location.timestamp
+            latitude    = coords.latitude,
+            longitude   = coords.longitude,
+            speed       = coords.speed;
+
+        console.log("A location has arrived:", timestamp, latitude, longitude, speed);
+    } catch(e) {
+        console.error("An error occurred in my application code", e);
+    }
+    // The plugin runs your callback in a background-thread:  
+    // you MUST signal to the native plugin when your callback is finished so it can halt the thread.
+    // IF YOU DON'T, iOS WILL KILL YOUR APP
+    bgGeo.finish(taskId);
+}, failureFn, {
+    distanceFilter: 50,
+    desiredAccuracy: 0,
+    stationaryRadius: 25
+});
+</code></pre>
+
+<h4><a id="user-content-setconfigsuccessfn-failurefn-config" class="anchor" href="#setconfigsuccessfn-failurefn-config" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>setConfig(successFn, failureFn, config)</code></h4>
 
 <p>Reconfigure plugin's configuration (@see followign ##Config## section for accepted <code>config</code> params.  <strong>NOTE</strong> The plugin will continue to send recorded Geolocation to the <code>locationCallback</code> you provided to <code>configure</code> method -- use this method only to change configuration params (eg: <code>distanceFilter</code>, <code>stationaryRadius</code>, etc).</p>
 
@@ -240,27 +310,39 @@ Keep in mind that it is <strong>not</strong> possible to use <code>start()</code
 });
 </code></pre>
 
-<h5>
-<a id="user-content-startsuccessfn-failurefn" class="anchor" href="#startsuccessfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>start(successFn, failureFn)</code>
-</h5>
+<h4><a id="user-content-startsuccessfn-failurefn" class="anchor" href="#startsuccessfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>start(successFn, failureFn)</code></h4>
 
 <p>Enable background geolocation tracking.</p>
 
 <pre><code>bgGeo.start()
 </code></pre>
 
-<h5>
-<a id="user-content-stopsuccessfn-failurefn" class="anchor" href="#stopsuccessfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>stop(successFn, failureFn)</code>
-</h5>
+<h4><a id="user-content-stopsuccessfn-failurefn" class="anchor" href="#stopsuccessfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>stop(successFn, failureFn)</code></h4>
 
 <p>Disable background geolocation tracking.</p>
 
 <pre><code>bgGeo.stop();
 </code></pre>
 
-<h5>
-<a id="user-content-changepaceenabled-successfn-failurefn" class="anchor" href="#changepaceenabled-successfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>changePace(enabled, successFn, failureFn)</code>
-</h5>
+<h4><a id="user-content-getcurrentpositionsuccessfn-failurefn" class="anchor" href="#getcurrentpositionsuccessfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>getCurrentPosition(successFn, failureFn)</code></h4>
+
+<p>Retrieves the current position.  This method instructs the native code to fetch exactly one location using maximum power &amp; accuracy.  <strong>NOTE:</strong> The plugin <strong>MUST</strong> be enabled via <code>#start</code> to use this method (otherwise the plugin will call your <code>failureFn</code> with a status-code <code>401</code> (UNAUTHORIZED).  The native code will persist the fetched location to its SQLite database just as any other location in addition to POSTing to your configured <code>#url</code> (if you've enabled the HTTP features).  In addition to your supplied <code>callbackFn</code>, the plugin will also execute the <code>callback</code> provided to <code>#configure</code>.  Your provided <code>successFn</code> will be executed with the same signature as that provided to <code>#configure</code>:</p>
+
+<h6><a id="user-content-param-object-location-the-location-data-1" class="anchor" href="#param-object-location-the-location-data-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Object} location The Location data</h6>
+
+<h6><a id="user-content-param-integer-taskid-the-taskid-used-to-send-to-bggeofinishtaskid-in-order-to-signal-completion-of-your-callbackfn-1" class="anchor" href="#param-integer-taskid-the-taskid-used-to-send-to-bggeofinishtaskid-in-order-to-signal-completion-of-your-callbackfn-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Integer} taskId The taskId used to send to bgGeo.finish(taskId) in order to signal completion of your callbackFn</h6>
+
+<pre><code>bgGeo.getCurrentPosition(function(location, taskId) {
+    // This location is already persisted to plugin’s SQLite db.  
+    // If you’ve configured #autoSync: true, the HTTP POST has already started.
+
+    console.log(“- Current position received: “, location);
+    bgGeo.finish(taskId);
+});
+
+</code></pre>
+
+<h4><a id="user-content-changepaceenabled-successfn-failurefn" class="anchor" href="#changepaceenabled-successfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>changePace(enabled, successFn, failureFn)</code></h4>
 
 <p>Initiate or cancel immediate background tracking.  When set to <code>true</code>, the plugin will begin aggressively tracking the devices Geolocation, bypassing stationary monitoring.  If you were making a "Jogging" application, this would be your [Start Workout] button to immediately begin GPS tracking.  Send <code>false</code> to disable aggressive GPS monitoring and return to stationary-monitoring mode.</p>
 
@@ -268,51 +350,207 @@ Keep in mind that it is <strong>not</strong> possible to use <code>start()</code
 bgGeo.changePace(false); // &lt;-- Disable aggressive GPS monitoring.  Engages stationary-mode.
 </code></pre>
 
-<h5>
-<a id="user-content-onstationarycallbackfn-failurefn" class="anchor" href="#onstationarycallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>onStationary(callbackFn, failureFn)</code>
-</h5>
+<h4><a id="user-content-onmotionchangecallbackfn-failurefn" class="anchor" href="#onmotionchangecallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>onMotionChange(callbackFn, failureFn)</code></h4>
 
-<p>Your <code>callbackFn</code> will be executed each time the device has entered stationary-monitoring mode.  The <code>callbackFn</code> will be provided with a <code>Geolocation</code> object as the 1st param, with the usual params (<code>latitude, longitude, accuracy, speed, bearing, altitude</code>).</p>
+<p>Your <code>callbackFn</code> will be executed each time the device has changed-state between <strong>MOVING</strong> or <strong>STATIONARY</strong>.  The <code>callbackFn</code> will be provided with a <code>Location</code> object as the 1st param, with the usual params (<code>latitude, longitude, accuracy, speed, bearing, altitude</code>), in addition to a <code>taskId</code> used to signal that your callback is finished.</p>
 
-<pre><code>bgGeo.onStationary(function(location) {
-    console.log('- Device is stopped: ', location.latitude, location.longitude);
+<h6><a id="user-content-param-boolean-ismoving-false-if-entered-stationary-mode-true-if-entered-moving-mode" class="anchor" href="#param-boolean-ismoving-false-if-entered-stationary-mode-true-if-entered-moving-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Boolean} isMoving <code>false</code> if entered <strong>STATIONARY</strong> mode; <code>true</code> if entered <strong>MOVING</strong> mode.</h6>
+
+<h6><a id="user-content-param-object-location-the-location-at-the-state-change" class="anchor" href="#param-object-location-the-location-at-the-state-change" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Object} location The location at the state-change.</h6>
+
+<h6><a id="user-content-param-integer-taskid-the-taskid-used-to-send-to-bggeofinishtaskid-in-order-to-signal-completion-of-your-callbackfn-2" class="anchor" href="#param-integer-taskid-the-taskid-used-to-send-to-bggeofinishtaskid-in-order-to-signal-completion-of-your-callbackfn-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Integer} taskId The taskId used to send to bgGeo.finish(taskId) in order to signal completion of your callbackFn</h6>
+
+<pre><code>bgGeo.onMotionChange(function(isMoving, location, taskId) {
+    if (isMoving) {
+        console.log('Device has just started MOVING', location);
+    } else {
+        console.log('Device has just STOPPED', location);
+    }
+    bgGeo.finish(taskId);
+})
+
+</code></pre>
+
+<h4><a id="user-content-onstationarycallbackfn-failurefn" class="anchor" href="#onstationarycallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>onStationary(callbackFn, failureFn)</code></h4>
+
+<p><strong>DEPRECATED</strong> — Use <a href="https://github.com/christocracy/cordova-background-geolocation/tree/trigger-activities#onmotionchangecallbackfn-failurefn">onMotionChange</a> instead.</p>
+
+<p>Your <code>callbackFn</code> will be executed each time the device has entered stationary-monitoring mode.  The <code>callbackFn</code> will be provided with a <code>Location</code> object as the 1st param, with the usual params (<code>latitude, longitude, accuracy, speed, bearing, altitude</code>), in addition to a <code>taskId</code> used to signal that your callback is finished.</p>
+
+<h6><a id="user-content-param-object-location-the-location-data-2" class="anchor" href="#param-object-location-the-location-data-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Object} location The Location data</h6>
+
+<h6><a id="user-content-param-integer-taskid-the-taskid-used-to-send-to-bggeofinishtaskid-in-order-to-signal-completion-of-your-callbackfn-3" class="anchor" href="#param-integer-taskid-the-taskid-used-to-send-to-bggeofinishtaskid-in-order-to-signal-completion-of-your-callbackfn-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Integer} taskId The taskId used to send to bgGeo.finish(taskId) in order to signal completion of your callbackFn</h6>
+
+<pre><code>bgGeo.onStationary(function(location, taskId) {
+    try {
+        console.log('- Device is stopped: ', location.latitude, location.longitude);
+    } catch(e) {
+        console.error('An error occurred in my application code', e);
+    }
+    // The plugin runs your callback in a background-thread:  
+    // you MUST signal to the native plugin when your callback is finished so it can halt the thread.
+    // IF YOU DON'T, iOS WILL KILL YOUR APP
+    bgGeo.finish(taskId);
 });
 </code></pre>
 
-<h5>
-<a id="user-content-getlocationscallbackfn-failurefn" class="anchor" href="#getlocationscallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>getLocations(callbackFn, failureFn)</code>
-</h5>
+<h4><a id="user-content-addgeofenceconfig-callbackfn-failurefn" class="anchor" href="#addgeofenceconfig-callbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>addGeofence(config, callbackFn, failureFn)</code></h4>
+
+<p>Adds a geofence to be monitored by the native plugin.  Monitoring of a geofence is halted after a crossing occurs.  The <code>config</code> object accepts the following params.</p>
+
+<h6><a id="user-content-config-string-identifier-the-name-of-your-geofence-eg-home-office" class="anchor" href="#config-string-identifier-the-name-of-your-geofence-eg-home-office" aria-hidden="true"><span class="octicon octicon-link"></span></a>@config {String} identifier The name of your geofence, eg: "Home", "Office"</h6>
+
+<h6><a id="user-content-config-float-radius-the-radius-meters-of-the-geofence--in-practice-you-should-make-this--100-meters" class="anchor" href="#config-float-radius-the-radius-meters-of-the-geofence--in-practice-you-should-make-this--100-meters" aria-hidden="true"><span class="octicon octicon-link"></span></a>@config {Float} radius The radius (meters) of the geofence.  In practice, you should make this &gt;= 100 meters.</h6>
+
+<h6><a id="user-content-config-float-latitude-latitude-of-the-center-point-of-the-circular-geofence" class="anchor" href="#config-float-latitude-latitude-of-the-center-point-of-the-circular-geofence" aria-hidden="true"><span class="octicon octicon-link"></span></a>@config {Float} latitude Latitude of the center-point of the circular geofence.</h6>
+
+<h6><a id="user-content-config-float-longitude-longitude-of-the-center-point-of-the-circular-geofence" class="anchor" href="#config-float-longitude-longitude-of-the-center-point-of-the-circular-geofence" aria-hidden="true"><span class="octicon octicon-link"></span></a>@config {Float} longitude Longitude of the center-point of the circular geofence.</h6>
+
+<h6><a id="user-content-config-boolean-notifyonexit-whether-to-listen-to-exit-events" class="anchor" href="#config-boolean-notifyonexit-whether-to-listen-to-exit-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>@config {Boolean} notifyOnExit Whether to listen to EXIT events</h6>
+
+<h6><a id="user-content-config-boolean-notifyonentry-whether-to-listen-to-enter-events" class="anchor" href="#config-boolean-notifyonentry-whether-to-listen-to-enter-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>@config {Boolean} notifyOnEntry Whether to listen to ENTER events</h6>
+
+<pre><code>bgGeo.addGeofence({
+    identifier: "Home",
+    radius: 150,
+    latitude: 45.51921926,
+    longitude: -73.61678581,
+    notifyOnEntry: true,
+    notifyOnExit: false
+}, function() {
+    console.log("Successfully added geofence");
+}, function(error) {
+    console.warn("Failed to add geofence", error);
+});
+</code></pre>
+
+<h4><a id="user-content-removegeofenceidentifier-callbackfn-failurefn" class="anchor" href="#removegeofenceidentifier-callbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>removeGeofence(identifier, callbackFn, failureFn)</code></h4>
+
+<p>Removes a geofence having the given <code>{String} identifier</code>.</p>
+
+<h6><a id="user-content-config-string-identifier-the-name-of-your-geofence-eg-home-office-1" class="anchor" href="#config-string-identifier-the-name-of-your-geofence-eg-home-office-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>@config {String} identifier The name of your geofence, eg: "Home", "Office"</h6>
+
+<h6><a id="user-content-config-function-callbackfn-successfully-removed-geofence" class="anchor" href="#config-function-callbackfn-successfully-removed-geofence" aria-hidden="true"><span class="octicon octicon-link"></span></a>@config {Function} callbackFn successfully removed geofence.</h6>
+
+<h6><a id="user-content-config-function-failurefn-failed-to-remove-geofence" class="anchor" href="#config-function-failurefn-failed-to-remove-geofence" aria-hidden="true"><span class="octicon octicon-link"></span></a>@config {Function} failureFn failed to remove geofence</h6>
+
+<pre><code>bgGeo.removeGeofence("Home", function() {
+    console.log("Successfully removed geofence");
+}, function(error) {
+    console.warn("Failed to remove geofence", error);
+});
+</code></pre>
+
+<h4><a id="user-content-getgeofencescallbackfn-failurefn" class="anchor" href="#getgeofencescallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>getGeofences(callbackFn, failureFn)</code></h4>
+
+<p>Fetch the list of monitored geofences.  Your <code>callbackFn</code> will be provided with an <code>Array</code> of geofences.  If there are no geofences being monitored, you'll receive an empty Array <code>[]</code>.</p>
+
+<pre><code>bgGeo.getGeofences(function(geofences) {
+    for (var n=0,len=geofences.length;n&lt;len;n++) {
+        console.log("Geofence: ", geofence.identifier, geofence.radius, geofence.latitude, geofence.longitude);
+    }
+}, function(error) {
+    console.warn("Failed to fetch geofences from server");
+});
+</code></pre>
+
+<h4><a id="user-content-ongeofencecallbackfn" class="anchor" href="#ongeofencecallbackfn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>onGeofence(callbackFn)</code></h4>
+
+<p>Adds a geofence event-listener.  Your supplied callback will be called when any monitored geofence crossing occurs.  The <code>callbackFn</code> will be provided the following parameters:</p>
+
+<h6><a id="user-content-param-object-params--this-object-contains-2-keys-param-string-identifier-and-param-string-action-enterexit" class="anchor" href="#param-object-params--this-object-contains-2-keys-param-string-identifier-and-param-string-action-enterexit" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Object} params.  This object contains 2 keys: <code>@param {String} identifier</code> and <code>@param {String} action [ENTER|EXIT]</code>.</h6>
+
+<h6><a id="user-content-param-integer-taskid-the-background-taskid-which-you-must-send-back-to-the-native-plugin-via-bggeofinishtaskid-in-order-to-signal-that-your-callback-is-complete" class="anchor" href="#param-integer-taskid-the-background-taskid-which-you-must-send-back-to-the-native-plugin-via-bggeofinishtaskid-in-order-to-signal-that-your-callback-is-complete" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Integer} taskId The background taskId which you must send back to the native plugin via <code>bgGeo.finish(taskId)</code> in order to signal that your callback is complete.</h6>
+
+<pre><code>bgGeo.onGeofence(function(params, taskId) {
+    try {
+        console.log('A geofence has been crossed: ', params.identifier);
+        console.log('ENTER or EXIT?: ', params.action);
+    } catch(e) {
+        console.error('An error occurred in my application code', e);
+    }
+    // The plugin runs your callback in a background-thread:  
+    // you MUST signal to the native plugin when your callback is finished so it can halt the thread.
+    // IF YOU DON'T, iOS WILL KILL YOUR APP
+    bgGeo.finish(taskId);
+});
+</code></pre>
+
+<h4><a id="user-content-getlocationscallbackfn-failurefn" class="anchor" href="#getlocationscallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>getLocations(callbackFn, failureFn)</code></h4>
 
 <p>Fetch all the locations currently stored in native plugin's SQLite database.  Your <code>callbackFn`` will receive an</code>Array``` of locations in the 1st parameter.  Eg:</p>
 
-<pre><code>    bgGeo.getLocations(function(locations) {
-        console.log("locations: ", locations);
+<p>The <code>callbackFn</code> will be executed with following params:</p>
+
+<h6><a id="user-content-param-array-locations--the-list-of-locations-stored-in-sqlite-database" class="anchor" href="#param-array-locations--the-list-of-locations-stored-in-sqlite-database" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Array} locations.  The list of locations stored in SQLite database.</h6>
+
+<h6><a id="user-content-param-integer-taskid-the-background-taskid-which-you-must-send-back-to-the-native-plugin-via-bggeofinishtaskid-in-order-to-signal-the-end-of-your-background-thread" class="anchor" href="#param-integer-taskid-the-background-taskid-which-you-must-send-back-to-the-native-plugin-via-bggeofinishtaskid-in-order-to-signal-the-end-of-your-background-thread" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Integer} taskId The background taskId which you must send back to the native plugin via <code>bgGeo.finish(taskId)</code> in order to signal the end of your background thread.</h6>
+
+<pre><code>    bgGeo.getLocations(function(locations, taskId) {
+        try {
+            console.log("locations: ", locations);
+        } catch(e) {
+            console.error("An error occurred in my application code");
+        }
+        bgGeo.finish(taskId);
     });
 </code></pre>
 
-<h5>
-<a id="user-content-synccallbackfn-failurefn" class="anchor" href="#synccallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>sync(callbackFn, failureFn)</code>
-</h5>
+<h4><a id="user-content-synccallbackfn-failurefn" class="anchor" href="#synccallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>sync(callbackFn, failureFn)</code></h4>
 
-<p>If the plugin is configured for HTTP with an <code>#url</code> and <code>#autoSync: false</code>, this method will initiate POSTing the locations currently stored in the native SQLite database to your configured <code>#url</code>.  All records in the database will be DELETED.  If you configured <code>batchSync: true</code>, all the locations will be sent to your server in a single HTTP POST request, otherwise the plugin will create execute an HTTP post for <strong>each</strong> location in the database (REST-style).  Your <code>callbackFn</code> will be executed and provided with an Array of all the locations from the SQLite database.  If the plugin failed to sync to your server (possibly because of no network connection), the <code>failureFn</code> will be called with an <code>errorMessage</code>.  If you are <strong>not</strong> using the HTTP features, <code>sync</code> is the only way to clear the native SQLite database.  Eg:</p>
+<p>If the plugin is configured for HTTP with an <code>#url</code> and <code>#autoSync: false</code>, this method will initiate POSTing the locations currently stored in the native SQLite database to your configured <code>#url</code>.  All records in the database will be DELETED.  If you configured <code>batchSync: true</code>, all the locations will be sent to your server in a single HTTP POST request, otherwise the plugin will create execute an HTTP post for <strong>each</strong> location in the database (REST-style).  Your <code>callbackFn</code> will be executed and provided with an Array of all the locations from the SQLite database.  If you configured the plugin for HTTP (by configuring an <code>#url</code>, your <code>callbackFn</code> will be executed after the HTTP request(s) have completed.  If the plugin failed to sync to your server (possibly because of no network connection), the <code>failureFn</code> will be called with an <code>errorMessage</code>.  If you are <strong>not</strong> using the HTTP features, <code>sync</code> is the only way to clear the native SQLite datbase.  Eg:</p>
 
-<pre><code>    bgGeo.sync(function(locations) {
-        // Here are all the locations from the database.  The database is now EMPTY.
-        console.log('synced locations: ', locations);
+<p>Your callback will be provided with the following params</p>
+
+<h6><a id="user-content-param-array-locations--the-list-of-locations-stored-in-sqlite-database-1" class="anchor" href="#param-array-locations--the-list-of-locations-stored-in-sqlite-database-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Array} locations.  The list of locations stored in SQLite database.</h6>
+
+<h6><a id="user-content-param-integer-taskid-the-background-taskid-which-you-must-send-back-to-the-native-plugin-via-bggeofinishtaskid-in-order-to-signal-the-end-of-your-background-thread-1" class="anchor" href="#param-integer-taskid-the-background-taskid-which-you-must-send-back-to-the-native-plugin-via-bggeofinishtaskid-in-order-to-signal-the-end-of-your-background-thread-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>@param {Integer} taskId The background taskId which you must send back to the native plugin via <code>bgGeo.finish(taskId)</code> in order to signal the end of your background thread.</h6>
+
+<pre><code>    bgGeo.sync(function(locations, taskId) {
+        try {
+            // Here are all the locations from the database.  The database is now EMPTY.
+            console.log('synced locations: ', locations);
+        } catch(e) {
+            console.error('An error occurred in my application code', e);
+        }
+
+        // Be sure to call finish(taskId) in order to signal the end of the background-thread.
+        bgGeo.finish(taskId);
     }, function(errorMessage) {
         console.warn('Sync FAILURE: ', errorMessage);
     });
 
 </code></pre>
 
-<h2>
-<a id="user-content-config" class="anchor" href="#config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config</h2>
+<h4><a id="user-content-getodometercallbackfn-failurefn" class="anchor" href="#getodometercallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>getOdometer(callbackFn, failureFn)</code></h4>
+
+<p>The plugin constantly tracks distance travelled.  To fetch the current <strong>odometer</strong> reading:</p>
+
+<pre><code>    bgGeo.getOdometer(function(distance) {
+        console.log("Distance travelled: ", distance);
+    });
+</code></pre>
+
+<h4><a id="user-content-resetodometercallbackfn-failurefn" class="anchor" href="#resetodometercallbackfn-failurefn" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>resetOdometer(callbackFn, failureFn)</code></h4>
+
+<p>Reset the <strong>odometer</strong> to zero.  The plugin never automatically resets the odometer so it's up to you to reset it as desired.</p>
+
+<h4><a id="user-content-playsoundsoundid" class="anchor" href="#playsoundsoundid" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>playSound(soundId)</code></h4>
+
+<p>Here's a fun one.  The plugin can play a number of OS system sounds for each platform.  For <a href="http://iphonedevwiki.net/index.php/AudioServices">IOS</a> and <a href="http://developer.android.com/reference/android/media/ToneGenerator.html">Android</a>.  I offer this API as-is, it's up to you to figure out how this works.</p>
+
+<pre><code>    // A soundId iOS recognizes
+    bgGeo.playSound(1303);
+
+    // An Android soundId
+    bgGeo.playSound(90);
+</code></pre>
+
+<h2><a id="user-content-config" class="anchor" href="#config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config</h2>
 
 <p>Use the following config-parameters with the #configure method:</p>
 
-<h5>
-<a id="user-content-param-boolean-debug" class="anchor" href="#param-boolean-debug" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} debug</code>
-</h5>
+<h4><a id="user-content-param-boolean-debug" class="anchor" href="#param-boolean-debug" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} debug</code></h4>
 
 <p>When enabled, the plugin will emit sounds for life-cycle events of background-geolocation!  <strong>NOTE iOS</strong>:  In addition, you must manually enable the <em>Audio and Airplay</em> background mode in <em>Background Capabilities</em> to hear these debugging sounds.</p>
 
@@ -324,29 +562,22 @@ bgGeo.changePace(false); // &lt;-- Disable aggressive GPS monitoring.  Engages s
 <li>Stationary location acquired sound:  <strong>[ios]</strong> "bloom" sound, <strong>[android]</strong> long "beeeeeep"</li>
 </ul>
 
-<p><a href="assets/images/enable-background-audio.png" target="_blank"><img src="assets/images/enable-background-audio.png" alt="Enable Background Audio" title="Enable Background Audio" style="max-width:100%;"></a></p>
+<p><a href="/christocracy/cordova-background-geolocation/blob/master/enable-background-audio.png" target="_blank"><img src="assets/images/enable-background-audio.png" alt="Enable Background Audio" title="Enable Background Audio" style="max-width:100%;"></a></p>
 
-<h5>
-<a id="user-content-param-integer-desiredaccuracy-0-10-100-1000-in-meters" class="anchor" href="#param-integer-desiredaccuracy-0-10-100-1000-in-meters" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} desiredAccuracy [0, 10, 100, 1000] in meters</code>
-</h5>
+<h4><a id="user-content-param-integer-desiredaccuracy-0-10-100-1000-in-meters" class="anchor" href="#param-integer-desiredaccuracy-0-10-100-1000-in-meters" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} desiredAccuracy [0, 10, 100, 1000] in meters</code></h4>
 
 <p>Specify the desired-accuracy of the geolocation system with 1 of 4 values, <code>0, 10, 100, 1000</code> where <code>0</code> means HIGHEST POWER, HIGHEST ACCURACY and <code>1000</code> means LOWEST POWER, LOWEST ACCURACY</p>
 
 <ul>
 <li><a href="https://developer.android.com/reference/com/google/android/gms/location/LocationRequest.html#PRIORITY_BALANCED_POWER_ACCURACY">Android</a></li>
-<li>
-<a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/index.html#//apple_ref/occ/instp/CLLocationManager/desiredAccuracy">iOS</a> </li>
+<li><a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/index.html#//apple_ref/occ/instp/CLLocationManager/desiredAccuracy">iOS</a> </li>
 </ul>
 
-<h5>
-<a id="user-content-param-integer-stationaryradius-meters" class="anchor" href="#param-integer-stationaryradius-meters" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} stationaryRadius (meters)</code>
-</h5>
+<h4><a id="user-content-param-integer-stationaryradius-meters" class="anchor" href="#param-integer-stationaryradius-meters" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} stationaryRadius (meters)</code></h4>
 
 <p>When stopped, the minimum distance the device must move beyond the stationary location for aggressive background-tracking to engage.  Note, since the plugin uses iOS significant-changes API, the plugin cannot detect the exact moment the device moves out of the stationary-radius.  In normal conditions, it can take as much as 3 city-blocks to 1/2 km before staionary-region exit is detected.</p>
 
-<h5>
-<a id="user-content-param-integer-distancefilter" class="anchor" href="#param-integer-distancefilter" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} distanceFilter</code>
-</h5>
+<h4><a id="user-content-param-integer-distancefilter" class="anchor" href="#param-integer-distancefilter" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} distanceFilter</code></h4>
 
 <p>The minimum distance (measured in meters) a device must move horizontally before an update event is generated.  @see <a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html#//apple_ref/occ/instp/CLLocationManager/distanceFilter">Apple docs</a>.  However, #distanceFilter is elastically auto-calculated by the plugin:  When speed increases, #distanceFilter increases;  when speed decreases, so does distanceFilter.</p>
 
@@ -374,75 +605,69 @@ bgGeo.changePace(false); // &lt;-- Disable aggressive GPS monitoring.  Engages s
 
 <p>Note the following real example of background-geolocation on highway 101 towards San Francisco as the driver slows down as he runs into slower traffic (geolocations become compressed as distanceFilter decreases)</p>
 
-<p><a href="assets/images/distance-filter-highway.png" target="_blank"><img src="assets/images/distance-filter-highway.png" alt="distanceFilter at highway speed" title="distanceFilter at highway speed" style="max-width:100%;"></a></p>
+<p><a href="/christocracy/cordova-background-geolocation/blob/master/distance-filter-highway.png" target="_blank"><img src="assets/images/distance-filter-highway.png" alt="distanceFilter at highway speed" title="distanceFilter at highway speed" style="max-width:100%;"></a></p>
 
 <p>Compare now background-geolocation in the scope of a city.  In this image, the left-hand track is from a cab-ride, while the right-hand track is walking speed.</p>
 
-<p><a href="assets/images/distance-filter-city.png" target="_blank"><img src="assets/images/distance-filter-city.png" alt="distanceFilter at city scale" title="distanceFilter at city scale" style="max-width:100%;"></a></p>
+<p><a href="/christocracy/cordova-background-geolocation/blob/master/distance-filter-city.png" target="_blank"><img src="assets/images/distance-filter-city.png" alt="distanceFilter at city scale" title="distanceFilter at city scale" style="max-width:100%;"></a></p>
 
-<h5>
-<a id="user-content-param-boolean-stoponterminate" class="anchor" href="#param-boolean-stoponterminate" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} stopOnTerminate</code>
-</h5>
+<h4><a id="user-content-param-boolean-stoponterminate" class="anchor" href="#param-boolean-stoponterminate" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} stopOnTerminate</code></h4>
 
 <p>Enable this in order to force a stop() when the application terminated (e.g. on iOS, double-tap home button, swipe away the app).  On Android, <code>stopOnTerminate: false</code> will cause the plugin to operate as a headless background-service (in this case, you should configure an #url in order for the background-service to send the location to your server)</p>
 
-<h5>
-<a id="user-content-param-boolean-stopafterelapsedminutes" class="anchor" href="#param-boolean-stopafterelapsedminutes" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} stopAfterElapsedMinutes</code>
-</h5>
+<h4><a id="user-content-param-boolean-stopafterelapsedminutes" class="anchor" href="#param-boolean-stopafterelapsedminutes" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} stopAfterElapsedMinutes</code></h4>
 
 <p>The plugin can optionally auto-stop monitoring location when some number of minutes elapse after being the #start method was called.</p>
 
-<h4>
-<a id="user-content-http-features" class="anchor" href="#http-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTTP Features</h4>
+<h3><a id="user-content-in-plugin-sqlite-storage" class="anchor" href="#in-plugin-sqlite-storage" aria-hidden="true"><span class="octicon octicon-link"></span></a>In-Plugin SQLite Storage</h3>
 
-<h5>
-<a id="user-content-param-string-url" class="anchor" href="#param-string-url" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} url</code>
-</h5>
+<p>The plugin will cache <strong>every</strong> recorded geolocation to its internal SQLite database -- when you sync the locations and your server responds with HTTP <code>200, 201 or 204</code>, the plugin will <strong>DELETE</strong> the stored location from cache.  The plugin has a cache-pruning feature with <code>@config {Integer} maxDaysToPersist</code> -- If the plugin hasn't successfully synced these these records in the database before  <code>maxDaysToPersist</code> expires, the plugin will give up and those geolocation records will be pruned from the database.</p>
 
-<p>By configuring an <code>#url</code>, the  plugin will always attempt to HTTP POST the location to your server.</p>
+<p>If you <strong>don't</strong> configure the optional HTTP feature, the only way to delete the SQLite database is by executing the <code>#sync</code> method.</p>
 
-<h5>
-<a id="user-content-param-string-batchsync-false" class="anchor" href="#param-string-batchsync-false" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} batchSync [false]</code>
-</h5>
+<pre><code>    bgGeo.sync(function(locations) {
+        // The SQLite database is now EMPTY.  
+        console.log('locations: ', locations);
+    });
+</code></pre>
+
+<h3><a id="user-content-http-features" class="anchor" href="#http-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTTP Features</h3>
+
+<h4><a id="user-content-param-string-url" class="anchor" href="#param-string-url" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} url</code></h4>
+
+<p>Your server url where you wish to HTTP POST location data to.</p>
+
+<h4><a id="user-content-param-string-batchsync-false" class="anchor" href="#param-string-batchsync-false" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} batchSync [false]</code></h4>
 
 <p>Default is <code>false</code>.  If you've enabled HTTP feature by configuring an <code>#url</code>, <code>batchSync: true</code> will POST all the locations currently stored in native SQLite datbase to your server in a single HTTP POST request.  With <code>batchSync: false</code>, an HTTP POST request will be initiated for <strong>each</strong> location in database.</p>
 
-<h5>
-<a id="user-content-param-string-autosync-true" class="anchor" href="#param-string-autosync-true" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} autoSync [true]</code>
-</h5>
+<h4><a id="user-content-param-string-autosync-true" class="anchor" href="#param-string-autosync-true" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} autoSync [true]</code></h4>
 
-<p>Default is <code>true</code>.  If you've enabeld HTTP feature by configuring an <code>#url</code>, the plugin will attempt to HTTP POST each location to your server as it is recorded.  If you set <code>autoSync: false</code>, it's up to you to manually execute the <code>#sync</code> method to initate the HTTP POST (<strong>NOTE</strong> The plugin will continue to persist <strong>every</strong> recorded location in the SQLite database until you execute <code>#sync</code>).</p>
+<p>Default is <code>true</code>.  If you've enabeld HTTP feature by configuring an <code>#url</code>, the plugin will attempt to HTTP POST each location to your server <strong>as it is recorded</strong>.  If you set <code>autoSync: false</code>, it's up to you to <strong>manually</strong> execute the <code>#sync</code> method to initate the HTTP POST (<strong>NOTE</strong> The plugin will continue to persist <strong>every</strong> recorded location in the SQLite database until you execute <code>#sync</code>).</p>
 
-<h5>
-<a id="user-content-param-object-params" class="anchor" href="#param-object-params" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Object} params</code>
-</h5>
+<h4><a id="user-content-param-object-params" class="anchor" href="#param-object-params" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Object} params</code></h4>
 
 <p>Optional HTTP params sent along in HTTP request to above <code>#url</code>.</p>
 
-<h5>
-<a id="user-content-param-object-headers" class="anchor" href="#param-object-headers" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Object} headers</code>
-</h5>
+<h4><a id="user-content-param-object-headers" class="anchor" href="#param-object-headers" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Object} headers</code></h4>
 
 <p>Optional HTTP params sent along in HTTP request to above <code>#url</code>.</p>
 
-<h5>
-<a id="user-content-param-integer-maxdaystopersist" class="anchor" href="#param-integer-maxdaystopersist" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} maxDaysToPersist</code>
-</h5>
+<h4><a id="user-content-param-integer-maxdaystopersist" class="anchor" href="#param-integer-maxdaystopersist" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} maxDaysToPersist</code></h4>
 
 <p>Maximum number of days to store a geolocation in plugin's SQLite database when your server fails to respond with <code>HTTP 200 OK</code>.  The plugin will continue attempting to sync with your server until <code>maxDaysToPersist</code> when it will give up and remove the location from the database.</p>
 
 <p>Both iOS and Android can send the Geolocation to your server simply by configuring an <code>#url</code> in addition to optional <code>#headers</code> and <code>#params</code>.  This is the preferred way to send the Geolocation to your server, rather than doing it yourself with Ajax in your javascript.  </p>
 
-<h5>
-<a id="user-content-in-plugin-sqlite-storage" class="anchor" href="#in-plugin-sqlite-storage" aria-hidden="true"><span class="octicon octicon-link"></span></a>In-Plugin SQLite Storage</h5>
-
-<p>When you enable HTTP Feature by configuring an <code>#url</code>, the plugin will cache every recorded geolocation to its internal SQLite database -- when your server responds with HTTP <code>200, 201 or 204</code>, the plugin will DELETE the stored location from cache.  The plugin has a cache-pruning feature with <code>@config {Integer} maxDaysToPersist</code> -- If your server hasn't responded with 200 before <code>maxDaysToPersist</code> expires, the plugin will give up on it and that geolocation will be pruned from the database.</p>
+<h4><a id="user-content-sample-http-request-arriving-at-your-server" class="anchor" href="#sample-http-request-arriving-at-your-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sample HTTP Request arriving at your server</h4>
 
 <pre><code>bgGeo.configure(callbackFn, failureFn, {
     .
     .
     .
     url: 'http://posttestserver.com/post.php?dir=cordova-background-geolocation',
+    autoSync: true,
+    batchSync: false,
     maxDaysToPersist: 1,
     headers: {
         "X-FOO": "bar"
@@ -496,12 +721,9 @@ No Post Params.
 == End post body ==
 </code></pre>
 
-<h3>
-<a id="user-content-android-config" class="anchor" href="#android-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android Config</h3>
+<h3><a id="user-content-android-config" class="anchor" href="#android-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android Config</h3>
 
-<h5>
-<a id="user-content-param-integer-millis-locationupdateinterval" class="anchor" href="#param-integer-millis-locationupdateinterval" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer millis} locationUpdateInterval</code>
-</h5>
+<h4><a id="user-content-param-integer-millis-locationupdateinterval" class="anchor" href="#param-integer-millis-locationupdateinterval" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer millis} locationUpdateInterval</code></h4>
 
 <p>Set the desired interval for active location updates, in milliseconds.</p>
 
@@ -511,9 +733,7 @@ No Post Params.
 
 <p>Applications with only the coarse location permission may have their interval silently throttled.</p>
 
-<h5>
-<a id="user-content-param-integer-millis-fastestlocationupdateinterval" class="anchor" href="#param-integer-millis-fastestlocationupdateinterval" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer millis} fastestLocationUpdateInterval</code>
-</h5>
+<h4><a id="user-content-param-integer-millis-fastestlocationupdateinterval" class="anchor" href="#param-integer-millis-fastestlocationupdateinterval" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer millis} fastestLocationUpdateInterval</code></h4>
 
 <p>Explicitly set the fastest interval for location updates, in milliseconds.</p>
 
@@ -533,59 +753,132 @@ No Post Params.
 
 <p>An interval of 0 is allowed, but not recommended, since location updates may be extremely fast on future implementations.</p>
 
-<h5>
-<a id="user-content-param-integer-millis-activityrecognitioninterval" class="anchor" href="#param-integer-millis-activityrecognitioninterval" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer millis} activityRecognitionInterval</code>
-</h5>
+<h4><a id="user-content-param-integer-millis-activityrecognitioninterval" class="anchor" href="#param-integer-millis-activityrecognitioninterval" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer millis} activityRecognitionInterval</code></h4>
 
 <p>the desired time between activity detections. Larger values will result in fewer activity detections while improving battery life. A value of 0 will result in activity detections at the fastest possible rate.</p>
 
-<h5>
-<a id="user-content-param-integer-minutes-stoptimeout" class="anchor" href="#param-integer-minutes-stoptimeout" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer minutes} stopTimeout</code>
-</h5>
+<h4><a id="user-content-param-integer-millis-minimumactivityrecognitionconfidence" class="anchor" href="#param-integer-millis-minimumactivityrecognitionconfidence" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer millis} minimumActivityRecognitionConfidence</code></h4>
+
+<p>Each activity-recognition-result returned by the API is tagged with a "confidence" level expressed as a %.  You can set your desired confidence to trigger a state-change.  Defaults to <code>80</code>.</p>
+
+<h4><a id="user-content-param-string-triggeractivities" class="anchor" href="#param-string-triggeractivities" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} triggerActivities</code></h4>
+
+<p>These are the comma-delimited list of <a href="https://developers.google.com/android/reference/com/google/android/gms/location/DetectedActivity">activity-names</a> returned by the <code>ActivityRecognition</code> API which will trigger a state-change from <strong>stationary</strong> to <strong>moving</strong>.  By default, this list is set to all five <strong>moving-states</strong>:  <code>"in_vehicle, on_bicycle, on_foot, running, walking"</code>.  If you wish, you could configure the plugin to only engage <strong>moving-mode</strong> for vehicles by providing only <code>"in_vehicle"</code>.</p>
+
+<h4><a id="user-content-param-integer-minutes-stoptimeout" class="anchor" href="#param-integer-minutes-stoptimeout" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer minutes} stopTimeout</code></h4>
 
 <p>The number of miutes to wait before turning off the GPS after the ActivityRecognition System (ARS) detects the device is <code>STILL</code> (defaults to 0, no timeout).  If you don't set a value, the plugin is eager to turn off the GPS ASAP.  An example use-case for this configuration is to delay GPS OFF while in a car waiting at a traffic light.</p>
 
-<h5>
-<a id="user-content-param-boolean-forcereload" class="anchor" href="#param-boolean-forcereload" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} forceReload</code>
-</h5>
+<h4><a id="user-content-param-boolean-forcereloadonmotionchange" class="anchor" href="#param-boolean-forcereloadonmotionchange" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} forceReloadOnMotionChange</code></h4>
 
-<p>If the user closes the application while the background-tracking has been started,  location-tracking will continue on if <code>stopOnTerminate: false</code>.  You may choose to force the foreground application to reload (since this is where your Javascript runs) by setting <code>foreceReload: true</code>.  This will guarantee that locations are always sent to your Javascript callback (<strong>WARNING</strong> possibly disruptive to user).</p>
+<p>If the user closes the application while the background-tracking has been started,  location-tracking will continue on if <code>stopOnTerminate: false</code>.  You may choose to force the foreground application to reload (since this is where your Javascript runs).  <code>forceReloadOnMotionChange: true</code> will reload the app only when a state-change occurs from <strong>stationary -&gt; moving</strong> or vice-versa. (<strong>WARNING</strong> possibly disruptive to user).</p>
 
-<h5>
-<a id="user-content-param-boolean-startonboot" class="anchor" href="#param-boolean-startonboot" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} startOnBoot</code>
-</h5>
+<h4><a id="user-content-param-boolean-forcereloadonlocationchange" class="anchor" href="#param-boolean-forcereloadonlocationchange" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} forceReloadOnLocationChange</code></h4>
+
+<p>If the user closes the application while the background-tracking has been started,  location-tracking will continue on if <code>stopOnTerminate: false</code>.  You may choose to force the foreground application to reload (since this is where your Javascript runs).  <code>forceReloadOnLocationChange: true</code> will reload the app when a new location is recorded.</p>
+
+<h4><a id="user-content-param-boolean-forcereloadongeofence" class="anchor" href="#param-boolean-forcereloadongeofence" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} forceReloadOnGeofence</code></h4>
+
+<p>If the user closes the application while the background-tracking has been started,  location-tracking will continue on if <code>stopOnTerminate: false</code>.  You may choose to force the foreground application to reload (since this is where your Javascript runs).  <code>forceReloadOnGeolocation: true</code> will reload the app only when a geofence crossing event has occurred.</p>
+
+<h4><a id="user-content-param-boolean-startonboot" class="anchor" href="#param-boolean-startonboot" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} startOnBoot</code></h4>
 
 <p>Set to <code>true</code> to start the background-service whenever the device boots.  Unless you configure the plugin to <code>forceReload</code> (ie: boot your app), you should configure the plugin's HTTP features so it can POST to your server in "headless" mode.</p>
 
-<h3>
-<a id="user-content-ios-config" class="anchor" href="#ios-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>iOS Config</h3>
+<h3><a id="user-content-ios-config" class="anchor" href="#ios-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>iOS Config</h3>
 
-<h5>
-<a id="user-content-param-boolean-disableelasticity-false" class="anchor" href="#param-boolean-disableelasticity-false" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} disableElasticity [false]</code>
-</h5>
+<h4><a id="user-content-param-boolean-disableelasticity-false" class="anchor" href="#param-boolean-disableelasticity-false" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} disableElasticity [false]</code></h4>
 
 <p>Defaults to <code>false</code>.  Set <code>true</code> to disable automatic speed-based <code>#distanceFilter</code> elasticity.  eg:  When device is moving at highway speeds, locations are returned at ~ 1 / km.</p>
 
-<h5>
-<a id="user-content-param-string-activitytype-automotivenavigation-othernavigation-fitness-other" class="anchor" href="#param-string-activitytype-automotivenavigation-othernavigation-fitness-other" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} activityType [AutomotiveNavigation, OtherNavigation, Fitness, Other]</code>
-</h5>
+<h4><a id="user-content-param-string-activitytype-automotivenavigation-othernavigation-fitness-other" class="anchor" href="#param-string-activitytype-automotivenavigation-othernavigation-fitness-other" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} activityType [AutomotiveNavigation, OtherNavigation, Fitness, Other]</code></h4>
 
 <p>Presumably, this affects ios GPS algorithm.  See <a href="https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html#//apple_ref/occ/instp/CLLocationManager/activityType">Apple docs</a> for more information</p>
 
-<h3>
-<a id="user-content-wp8-config" class="anchor" href="#wp8-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>WP8 Config</h3>
+<h3><a id="user-content-wp8-config" class="anchor" href="#wp8-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>WP8 Config</h3>
 
-<h5>
-<a id="user-content-integer-0-10-100-1000-desiredaccuracy" class="anchor" href="#integer-0-10-100-1000-desiredaccuracy" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>{Integer [0, 10, 100, 1000]} desiredAccuracy</code>
-</h5>
+<h4><a id="user-content-integer-0-10-100-1000-desiredaccuracy" class="anchor" href="#integer-0-10-100-1000-desiredaccuracy" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>{Integer [0, 10, 100, 1000]} desiredAccuracy</code></h4>
 
-<h6>
-<a id="user-content-windows-phone" class="anchor" href="#windows-phone" aria-hidden="true"><span class="octicon octicon-link"></span></a>Windows Phone</h6>
+<h5><a id="user-content-windows-phone" class="anchor" href="#windows-phone" aria-hidden="true"><span class="octicon octicon-link"></span></a>Windows Phone</h5>
 
 <p>The underlying GeoLocator you can choose to use 'DesiredAccuracy' or 'DesiredAccuracyInMeters'. Since this plugins default configuration accepts meters, the default desiredAccuracy is mapped to the Windows Phone DesiredAccuracyInMeters leaving the DesiredAccuracy enum empty. For more info see the <a href="http://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.geolocation.geolocator.desiredaccuracyinmeters">MS docs</a> for more information.</p>
 
-<h2>
-<a id="user-content-licence" class="anchor" href="#licence" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licence</h2>
+<h1><a id="user-content-geofence-features" class="anchor" href="#geofence-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geofence Features</h1>
+
+<p><a href="https://camo.githubusercontent.com/46461c13dc17bd14fcf58d4a3a23704aac88c7da/68747470733a2f2f7777772e64726f70626f782e636f6d2f732f36303969696272366f667a6f7137702f53637265656e73686f74253230323031352d30362d303625323031372e30352e33332e706e673f646c3d31" target="_blank"><img src="https://camo.githubusercontent.com/46461c13dc17bd14fcf58d4a3a23704aac88c7da/68747470733a2f2f7777772e64726f70626f782e636f6d2f732f36303969696272366f667a6f7137702f53637265656e73686f74253230323031352d30362d303625323031372e30352e33332e706e673f646c3d31" alt="Geofence Features" data-canonical-src="https://www.dropbox.com/s/609iibr6ofzoq7p/Screenshot%202015-06-06%2017.05.33.png?dl=1" style="max-width:100%;"></a></p>
+
+<p>The plugin includes native <strong>geofencing</strong> features.  You may add, remove and query the list of monitored geofences from the native plugin.  The native plugin will persist monitored geofences and re-initiate them when the app boots or the device is restarted.</p>
+
+<p>A monitored geofence <strong>will remain active</strong> until you explicity remove it via <code>bgGeo.removeGeofence(identifier)</code>.</p>
+
+<h4><a id="user-content-geofence-model" class="anchor" href="#geofence-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geofence Model</h4>
+
+<h5><a id="user-content-param-string-identifier" class="anchor" href="#param-string-identifier" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {String} identifier</code></h5>
+
+<p>A unique <code>String</code> to identify your Geofence, eg: "Home", "Office".</p>
+
+<h5><a id="user-content-param-integer-radius" class="anchor" href="#param-integer-radius" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Integer} radius</code></h5>
+
+<p>The radius of the circular geofence.  A radius of &gt;100 meters works best.</p>
+
+<h5><a id="user-content-param-boolean-notifyonentry" class="anchor" href="#param-boolean-notifyonentry" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} notifyOnEntry</code></h5>
+
+<p>Transitioning <strong>into</strong> the geofence will generate an event.</p>
+
+<h5><a id="user-content-param-boolean-notifyonexit" class="anchor" href="#param-boolean-notifyonexit" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>@param {Boolean} notifyOnExit</code></h5>
+
+<p>Transitioning <strong>out of</strong> the geofence will generate an event.</p>
+
+<h4><a id="user-content-listening-to-geofence-events" class="anchor" href="#listening-to-geofence-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Listening to Geofence Events</h4>
+
+<p>Listen to geofence transition events using the method <code>#onGeofence</code>.  You may set up any number of <code>#onGeofence</code> event-listeners throughout your code -- they will all be executed.</p>
+
+<pre><code>    bgGeo.addGeofence({
+        identifier: "Home",
+        radius: 200,
+        latitude: 47.2342323,
+        longitude: -57.342342,
+        notifyOnEntry: true
+    });
+
+    bgGeo.onGeofence(function(geofence, taskId) {
+        try {
+            console.log("- A Geofence transition occurred");
+            console.log("  identifier: ", geofence.identifier);
+            console.log("  action: ", geofence.action);
+        } catch(e) {
+            console.error("An error occurred in my code!", e);
+        }
+        // Be sure to call #finish!!
+        bgGeo.finish(taskId);
+    });
+</code></pre>
+
+<h4><a id="user-content-removing-geofences" class="anchor" href="#removing-geofences" aria-hidden="true"><span class="octicon octicon-link"></span></a>Removing Geofences</h4>
+
+<p>The native plugin will continue to monitor geofences and fire transition-events until you explicity tell the plugin to remove a geofence via <code>#removeGeofence(identifier)</code>.</p>
+
+<pre><code>    bgGeo.removeGeofence("Home");
+
+</code></pre>
+
+<h4><a id="user-content-querying-geofences" class="anchor" href="#querying-geofences" aria-hidden="true"><span class="octicon octicon-link"></span></a>Querying Geofences</h4>
+
+<p>The native plugin persists monitored geofences between application boots and device restarts.  When your app boots, you can fetch the currently monitored geofences from the native plugin and, for example, re-draw markers on your map.</p>
+
+<pre><code>    bgGeo.getGeofences(function(geofences) {
+        for (var n=0,len=geofences.length;n&lt;len;n++) {
+            var geofence = geofences[n];
+            var marker = new google.maps.Circle({
+                radius: parseInt(geofence.radius, 10),
+                center: new google.maps.LatLng(geofence.latitude, geofence.longitude),
+                map: myMapInstance
+            });
+        }
+    });
+</code></pre>
+
+<h2><a id="user-content-licence" class="anchor" href="#licence" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licence</h2>
 
 <pre><code>cordova-background-geolocation
 Copyright (c) 2015, Transistor Software (9224-2932 Quebec Inc)
@@ -596,8 +889,7 @@ http://transistorsoft.com
 
 <ol>
 <li><p>Preamble:  This Agreement governs the relationship between YOU OR THE ORGANIZATION ON WHOSE BEHALF YOU ARE ENTERING INTO THIS AGREEMENT (hereinafter: Licensee) and Transistor Software, a LICENSOR AFFILIATION whose principal place of business is Montreal, Quebec, Canada (Hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using {software} created and owned by Licensor, as detailed herein</p></li>
-<li>
-<p>License Grant: Licensor hereby grants Licensee a Personal, Non-assignable &amp; non-transferable, Commercial, Royalty free, Including the rights to create but not distribute derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.</p>
+<li><p>License Grant: Licensor hereby grants Licensee a Personal, Non-assignable &amp; non-transferable, Commercial, Royalty free, Including the rights to create but not distribute derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.</p>
 
 <p>2.1 Limited: Licensee may use Software for the purpose of:
     - Running Software on Licensee's Website[s] and Server[s];
@@ -606,19 +898,14 @@ http://transistorsoft.com
     - Distribute verbatim copies of Software's output (including compiled binaries);
     - Modify Software to suit Licensee’s needs and specifications.</p>
 
-<p>2.2 Binary Restricted: Licensee may sublicense Software as a part of a larger work containing more than Software, distributed solely in Object or Binary form under a personal, non-sublicensable, limited license. Such redistribution shall be limited to unlimited codebases.</p>
-</li>
-<li>
-<p></p>
+<p>2.2 Binary Restricted: Licensee may sublicense Software as a part of a larger work containing more than Software, distributed solely in Object or Binary form under a personal, non-sublicensable, limited license. Such redistribution shall be limited to unlimited codebases.</p></li><li><p></p>
 
 <p>2.3 Non Assignable &amp; Non-Transferable: Licensee may not assign or transfer his rights and duties under this license.</p>
 
 <p>2.4 Commercial, Royalty Free: Licensee may use Software for any purpose, including paid-services, without any royalties</p>
 
-<p>2.5 Including the Right to Create Derivative Works: Licensee may create derivative works based on Software, including amending Software’s source code, modifying it, integrating it into a larger work or removing portions of Software, as long as no distribution of the derivative works is made.</p>
-</li>
-<li>
-<p>Term &amp; Termination:  The Term of this license shall be until terminated. Licensor may terminate this Agreement, including Licensee's license in the case where Licensee : </p>
+<p>2.5 Including the Right to Create Derivative Works: Licensee may create derivative works based on Software, including amending Software’s source code, modifying it, integrating it into a larger work or removing portions of Software, as long as no distribution of the derivative works is made.</p></li>
+<li><p>Term &amp; Termination:  The Term of this license shall be until terminated. Licensor may terminate this Agreement, including Licensee's license in the case where Licensee : </p>
 
 <p>3.1 became insolvent or otherwise entered into any liquidation process; or</p>
 
@@ -628,44 +915,36 @@ http://transistorsoft.com
 
 <p>3.4 Licensee in breach of any of the terms of clause 2 to this license; or</p>
 
-<p>3.5 Licensee otherwise entered into any arrangement which caused Licensor to be unable to enforce his rights under this License.</p>
-</li>
+<p>3.5 Licensee otherwise entered into any arrangement which caused Licensor to be unable to enforce his rights under this License.</p></li>
 <li><p>Payment: In consideration of the License granted under clause 2, Licensee shall pay Licensor a FEE, via Credit-Card, PayPal or any other mean which Licensor may deem adequate. Failure to perform payment shall construe as material breach of this Agreement.</p></li>
-<li>
-<p>Upgrades, Updates and Fixes: Licensor may provide Licensee, from time to time, with Upgrades,  Updates or Fixes, as detailed herein and according to his sole discretion. Licensee hereby warrants to keep The Software up-to-date and install all relevant updates and fixes, and may, at his sole discretion, purchase upgrades, according to the rates set by Licensor. Licensor shall provide any update or Fix free of charge; however, nothing in this Agreement shall require Licensor to provide Updates or Fixes.</p>
+<li><p>Upgrades, Updates and Fixes: Licensor may provide Licensee, from time to time, with Upgrades,  Updates or Fixes, as detailed herein and according to his sole discretion. Licensee hereby warrants to keep The Software up-to-date and install all relevant updates and fixes, and may, at his sole discretion, purchase upgrades, according to the rates set by Licensor. Licensor shall provide any update or Fix free of charge; however, nothing in this Agreement shall require Licensor to provide Updates or Fixes.</p>
 
 <p>5.1 Upgrades: for the purpose of this license, an Upgrade  shall be a material amendment in The Software, which contains new features   and or major performance improvements and shall be marked as a new version number. For example, should Licensee purchase The Software under   version 1.X.X, an upgrade shall commence under number 2.0.0.</p>
 
 <p>5.2 Updates: for the purpose of this license, an update shall be a minor amendment   in The Software, which may contain new features or minor improvements and   shall be marked as a new sub-version number. For example, should   Licensee purchase The Software under version 1.1.X, an upgrade shall   commence under number 1.2.0.</p>
 
-<p>5.3 Fix: for the purpose of this license, a fix shall be a minor amendment in   The Software, intended to remove bugs or alter minor features which impair   the The Software's functionality. A fix shall be marked as a new   sub-sub-version number. For example, should Licensee purchase Software   under version 1.1.1, an upgrade shall commence under number 1.1.2.</p>
-</li>
-<li>
-<p>Support: Software is provided under an AS-IS basis and without any support, updates or maintenance. Nothing in this Agreement shall require Licensor to provide Licensee with support or fixes to any bug, failure, mis-performance or other defect in The Software.</p>
+<p>5.3 Fix: for the purpose of this license, a fix shall be a minor amendment in   The Software, intended to remove bugs or alter minor features which impair   the The Software's functionality. A fix shall be marked as a new   sub-sub-version number. For example, should Licensee purchase Software   under version 1.1.1, an upgrade shall commence under number 1.1.2.</p></li>
+<li><p>Support: Software is provided under an AS-IS basis and without any support, updates or maintenance. Nothing in this Agreement shall require Licensor to provide Licensee with support or fixes to any bug, failure, mis-performance or other defect in The Software.</p>
 
 <p>6.1 Bug Notification: Licensee may provide Licensor of details regarding any bug, defect or   failure in The Software promptly and with no delay from such event;  Licensee  shall comply with Licensor's request for information regarding  bugs,  defects or failures and furnish him with information,  screenshots and  try to reproduce such bugs, defects or failures.</p>
 
-<p>6.2 Feature Request: Licensee may request additional features in Software, provided, however, that (i) Licensee shall waive any claim or right in such feature should feature be developed by Licensor; (ii) Licensee shall be prohibited from developing the feature, or disclose such feature   request, or feature, to any 3rd party directly competing with Licensor or any 3rd party which may be, following the development of such feature, in direct competition with Licensor; (iii) Licensee warrants that feature does not infringe any 3rd party patent, trademark, trade-secret or any other intellectual property right; and (iv) Licensee developed, envisioned or created the feature solely by himself.</p>
-</li>
+<p>6.2 Feature Request: Licensee may request additional features in Software, provided, however, that (i) Licensee shall waive any claim or right in such feature should feature be developed by Licensor; (ii) Licensee shall be prohibited from developing the feature, or disclose such feature   request, or feature, to any 3rd party directly competing with Licensor or any 3rd party which may be, following the development of such feature, in direct competition with Licensor; (iii) Licensee warrants that feature does not infringe any 3rd party patent, trademark, trade-secret or any other intellectual property right; and (iv) Licensee developed, envisioned or created the feature solely by himself.</p></li>
 <li><p>Liability: To the extent permitted under Law, The Software is provided under an   AS-IS basis. Licensor shall never, and without any limit, be liable for   any damage, cost, expense or any other payment incurred by Licensee as a   result of Software’s actions, failure, bugs and/or any other  interaction  between The Software  and Licensee’s end-equipment, computers,  other  software or any 3rd party, end-equipment, computer or  services. Moreover, Licensor shall never be liable for any defect in  source code  written by Licensee when relying on The Software or using The Software’s source  code.</p></li>
-<li>
-<p>Warranty: </p>
+<li><p>Warranty: </p>
 
 <p>8.1 Intellectual Property:  Licensor   hereby warrants that The Software does not violate or infringe any 3rd   party claims in regards to intellectual property, patents and/or   trademarks and that to the best of its knowledge no legal action has   been taken against it for any infringement or violation of any 3rd party   intellectual property rights.</p>
 
 <p>8.2 No-Warranty: The Software is provided without any warranty; Licensor hereby disclaims   any warranty that The Software shall be error free, without defects or code   which may cause damage to Licensee’s computers or to Licensee, and  that  Software shall be functional. Licensee shall be solely liable to  any  damage, defect or loss incurred as a result of operating software  and  undertake the risks contained in running The Software on License’s  Server[s]  and Website[s].</p>
 
-<p>8.3 Prior Inspection:  Licensee hereby states that he inspected The Software thoroughly and found   it satisfactory and adequate to his needs, that it does not interfere   with his regular operation and that it does meet the standards and  scope  of his computer systems and architecture. Licensee found that  The Software  interacts with his development, website and server environment  and that  it does not infringe any of End User License Agreement of any  software  Licensee may use in performing his services. Licensee hereby  waives any  claims regarding The Software's incompatibility, performance,  results and  features, and warrants that he inspected the The Software.</p>
-<p></p>
-</li>
+<p>8.3 Prior Inspection:  Licensee hereby states that he inspected The Software thoroughly and found   it satisfactory and adequate to his needs, that it does not interfere   with his regular operation and that it does meet the standards and  scope  of his computer systems and architecture. Licensee found that  The Software  interacts with his development, website and server environment  and that  it does not infringe any of End User License Agreement of any  software  Licensee may use in performing his services. Licensee hereby  waives any  claims regarding The Software's incompatibility, performance,  results and  features, and warrants that he inspected the The Software.</p><p></p></li>
 <li><p>No Refunds:  Licensee warrants that he inspected The Software according to clause 7(c)   and that it is adequate to his needs. Accordingly, as The Software is   intangible goods, Licensee shall not be, ever, entitled to any refund,   rebate, compensation or restitution for any reason whatsoever, even if   The Software contains material flaws.</p></li>
 <li><p>Indemnification:  Licensee hereby warrants to hold Licensor harmless and indemnify Licensor for any lawsuit brought against it in regards to Licensee’s use   of The Software in means that violate, breach or otherwise circumvent this   license, Licensor's intellectual property rights or Licensor's title  in  The Software. Licensor shall promptly notify Licensee in case of such  legal  action and request Licensee's consent prior to any settlement in relation to such lawsuit or claim.</p></li>
 <li><p>Governing Law, Jurisdiction:  Licensee hereby agrees not to initiate class-action lawsuits against Licensor in relation to this license and to compensate Licensor for any legal fees, cost or attorney fees should any claim brought by Licensee against Licensor be denied, in part or in full.</p></li>
 </ol>
 </article>
+  </div>
 
-  </div>
-  </div>
+</div>
 <!-- END README -->
     </body>
 </html>
