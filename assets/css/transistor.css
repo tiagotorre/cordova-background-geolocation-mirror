@@ -1,3 +1,17 @@
+/**
+* panel-
+*/
+.text-transistor {
+	color: #ffd700;
+}
+.btn.btn-transistor {
+  background-color: #ffd700;
+  border-color: #F2C900;
+  color: #333;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+}
+
 section.header {
 	padding-top: 0;
 }
@@ -51,4 +65,36 @@ section.header {
 
 blockquote {
 	font-style: italic;
+}
+
+/**
+* plans & pricing
+*/
+#plans .price-panel {
+	width: 50%;
+	/*background-color: #ffd700;*/
+}
+.price-panel .panel-body {
+	background-color: transparent;
+}
+.price-panel p.lead {
+	color: #fff;
+}
+.price-panel .panel-transistor {
+	border: 1px solid #666;
+	background-color: #666 !important;
+  background: -moz-linear-gradient(top, #333333 0%, #666666 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #333333), color-stop(100%, #666666));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #333333 0%, #666666 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #333333 0%, #666666 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #333333 0%, #666666 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #333333 0%, #666666 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
 }
