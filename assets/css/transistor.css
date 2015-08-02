@@ -79,6 +79,7 @@ blockquote {
 }
 #plans h3.value strong {
 	color: #000;
+	font-size: 28px;
 }
 .price-panel .panel-body {
 	background-color: transparent;
