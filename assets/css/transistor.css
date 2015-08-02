@@ -75,10 +75,10 @@ blockquote {
 	/*background-color: #ffd700;*/
 }
 #plans h3.value {
-	font-color: #777;
+	color: #777;
 }
 #plans h3.value strong {
-	font-color: #000;
+	color: #000;
 }
 .price-panel .panel-body {
 	background-color: transparent;
